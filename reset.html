@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="robots" content="noindex" />
+    <title>GrowTogether SportsClub – Új jelszó</title>
+    <!--
+      Jelszó-helyreállító híd (GrowTogether SportsClub, SPEC L6).
+      A Supabase a munkamenetet a HASH-ben adja át (#access_token=...&type=recovery).
+      A hash nem megy el a szervernek; ez az oldal továbbadja az app egyedi sémájára.
+      SZÁNDÉKOSAN nincs külső szkript, betűkészlet, kép vagy analitika: a hash
+      hozzáférési tokent tartalmaz, más eredetű kód nem láthatja.
+      Forrás: docs/bridge/reset.html (a fő repóban, review-zva); a kiszolgált
+      példány a GrowTogether-SportsLab/app-pages repóban (docs/bridge/README.md).
+    -->
+    <style>
+      body {
+        margin: 0;
+        font-family: -apple-system, system-ui, sans-serif;
+        background: #f7f6fc;
+        color: #151521;
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+      }
+      main {
+        max-width: 26rem;
+        padding: 2rem 1.25rem;
+        text-align: center;
+      }
+      h1 {
+        font-size: 1.4rem;
+        margin: 0 0 0.75rem;
+      }
+      p {
+        line-height: 1.5;
+        margin: 0 0 1.25rem;
+      }
+      a.btn {
+        display: block;
+        padding: 1rem;
+        border-radius: 0.75rem;
+        background: #40246f;
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 1.1rem;
+      }
+      .en {
+        color: #5b5b6b;
+        font-size: 0.9rem;
+        margin-top: 1.5rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #151521;
+          color: #f7f6fc;
+        }
+        .en {
+          color: #a9a9b8;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Új jelszó beállítása</h1>
+      <p id="msg">Nyisd meg az appot az új jelszó megadásához.</p>
+      <a class="btn" id="open" href="growtogether://reset-password">Megnyitás az appban</a>
+      <p class="en">Set a new password: tap “Megnyitás az appban” (Open in the app).</p>
+    </main>
+    <script>
+      (function () {
+        var target = 'growtogether://reset-password';
+        var hash = window.location.hash || '';
+        var query = window.location.search || '';
+        // A GoTrue hibát (lejárt link) is a hash-ben küldi - azt is az app mondja ki.
+        var suffix = query + hash;
+        document.getElementById('open').href = target + suffix;
+        // A tokent ne hagyjuk a címsorban / előzményekben.
+        if (hash || query) history.replaceState(null, '', window.location.pathname);
+        if (!hash && !query) {
+          document.getElementById('msg').textContent =
+            'Ez az oldal a jelszó-helyreállító levél linkjéből nyílik meg. Kérj új levelet az appban.';
+          return;
+        }
+        // Automatikus megnyitási kísérlet; ha a böngésző nem engedi, a gomb marad.
+        window.location.href = target + suffix;
+      })();
+    </script>
+  </body>
+</html>
