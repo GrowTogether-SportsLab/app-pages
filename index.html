@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Egyelore ne talaljak meg a keresok (2026-10-15). Forras: GrowTogether-SportsClub docs/site/ (README). -->
+<meta name="robots" content="noindex, nofollow">
+<title>GrowTogether SportsClub</title>
+<style>
+:root{--ink:#151521;--muted:#5C5B66;--line:#E3E2EA;--paper:#F7F6FC;--white:#FFFFFF;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--paper);
+     color:var(--ink);line-height:1.6;font-size:16.5px;}
+.wrap{max-width:760px;margin:0 auto;background:var(--white);min-height:100vh;}
+header{background:var(--ink);color:var(--white);padding:40px 44px 34px;position:relative;}
+.brand{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9C8D2;}
+.brand a{color:inherit;text-decoration:none;}
+h1{font-size:clamp(26px,4.4vw,36px);line-height:1.15;margin-top:14px;}
+.sub{margin-top:10px;color:#DCDBE4;max-width:56ch;}
+.lang{position:absolute;top:18px;right:20px;display:flex;border:1px solid rgba(255,255,255,.4);}
+.lang a{color:#DCDBE4;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.12em;padding:7px 12px;}
+.lang a.on{background:var(--white);color:var(--ink);}
+main{padding:12px 44px 40px;}
+h2{font-size:20px;margin:30px 0 10px;}
+h3{font-size:17px;margin:22px 0 6px;}
+p{margin-bottom:12px;}
+ul,ol{margin:0 0 14px 22px;}
+li{margin-bottom:6px;}
+a{color:var(--ink);}
+.cards{list-style:none;margin:24px 0 0;display:grid;gap:12px;}
+.cards a{display:block;border:1px solid var(--line);padding:16px 18px;text-decoration:none;}
+.cards a:hover{border-color:var(--ink);}
+.cards b{display:block;font-size:17px;}
+.cards span{color:var(--muted);font-size:15px;}
+.note{background:var(--paper);border-left:4px solid var(--ink);padding:14px 18px;margin:16px 0;}
+.note p:last-child{margin-bottom:0;}
+footer{border-top:1px solid var(--line);padding:22px 44px 30px;font-size:14px;color:var(--muted);}
+footer a{color:var(--muted);margin-right:14px;}
+/* Script nelkul mindket nyelv latszik; a script csak az egyiket mutatja. */
+.js [data-lang]:not(.on){display:none;}
+@media (max-width:640px){header{padding:52px 16px 26px;}main{padding:8px 16px 32px;}footer{padding:20px 16px 26px;}.lang{top:12px;right:12px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <nav class="lang" aria-label="Nyelv / Language"><a href="#hu" data-set="hu">HU</a><a href="#en" data-set="en">EN</a></nav>
+  <div data-lang="hu">
+    <p class="brand">GrowTogether SportsClub</p>
+    <h1>Klubmenedzsment sportegyesületeknek</h1>
+    <p class="sub">Edzések, versenyek, jelenlét és üzenetek egy helyen: edzőknek, sportolóknak és szülőknek.</p>
+  </div>
+  <div data-lang="en" lang="en">
+    <p class="brand">GrowTogether SportsClub</p>
+    <h1>Club management for sports clubs</h1>
+    <p class="sub">Trainings, competitions, attendance and messages in one place, for coaches, athletes and parents.</p>
+  </div>
+</header>
+
+<main>
+  <div data-lang="hu">
+    <ul class="cards">
+      <li><a href="privacy"><b>Adatkezelési tájékoztató</b><span>Milyen adatot kezelünk, miért, és milyen jogaid vannak.</span></a></li>
+      <li><a href="support"><b>Támogatás</b><span>Kérdés, hiba vagy kérés: így érsz el minket.</span></a></li>
+      <li><a href="delete-account"><b>Fiók és adatok törlése</b><span>Hogyan kérheted a fiókod vagy egyes adataid törlését.</span></a></li>
+    </ul>
+  </div>
+  <div data-lang="en" lang="en">
+    <ul class="cards">
+      <li><a href="privacy"><b>Privacy notice</b><span>What data we process, why, and what your rights are.</span></a></li>
+      <li><a href="support"><b>Support</b><span>Questions, bugs or requests: how to reach us.</span></a></li>
+      <li><a href="delete-account"><b>Delete your account and data</b><span>How to request deletion of your account or of some of your data.</span></a></li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <a href="./">GrowTogether SportsClub</a><a href="privacy">Privacy</a><a href="support">Support</a><a href="delete-account">Delete account</a>
+  · <a href="mailto:support@growtogethersportsclub.com">support@growtogethersportsclub.com</a>
+</footer>
+
+</div>
+<script>
+(function(){
+  var titles={hu:'GrowTogether SportsClub',en:'GrowTogether SportsClub'};
+  function setLang(lang){
+    document.documentElement.className='js';
+    document.documentElement.setAttribute('lang',lang);
+    document.querySelectorAll('[data-lang]').forEach(function(el){el.classList.toggle('on',el.getAttribute('data-lang')===lang);});
+    document.querySelectorAll('[data-set]').forEach(function(el){el.classList.toggle('on',el.getAttribute('data-set')===lang);});
+    document.title=titles[lang];
+    // A sajat lapok kozti link viszi a nyelvet (#en).
+    document.querySelectorAll('a[href]:not([data-set])').forEach(function(a){
+      var h=a.getAttribute('data-href')||a.getAttribute('href');
+      if(/^(https?:|mailto:|#)/.test(h)) return;
+      a.setAttribute('data-href',h);
+      a.setAttribute('href',lang==='en'?h+'#en':h);
+    });
+  }
+  function fromHash(){setLang(location.hash==='#en'?'en':'hu');}
+  window.addEventListener('hashchange',fromHash);
+  fromHash();
+})();
+</script>
+</body>
+</html>
