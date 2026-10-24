@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Egyelore ne talaljak meg a keresok (2026-10-15). Forras: GrowTogether-SportsClub docs/site/ (README). -->
+<meta name="robots" content="noindex, nofollow">
+<title>Gyakori kérdések · GrowTogether SportsClub</title>
+<style>
+:root{--ink:#151521;--muted:#5C5B66;--line:#E3E2EA;--paper:#F7F6FC;--white:#FFFFFF;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--paper);
+     color:var(--ink);line-height:1.6;font-size:16.5px;}
+.wrap{max-width:760px;margin:0 auto;background:var(--white);min-height:100vh;}
+header{background:var(--ink);color:var(--white);padding:40px 44px 34px;position:relative;}
+.brand{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9C8D2;}
+.brand a{color:inherit;text-decoration:none;}
+h1{font-size:clamp(26px,4.4vw,36px);line-height:1.15;margin-top:14px;}
+.sub{margin-top:10px;color:#DCDBE4;max-width:56ch;}
+.lang{position:absolute;top:18px;right:20px;display:flex;border:1px solid rgba(255,255,255,.4);}
+.lang a{color:#DCDBE4;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.12em;padding:7px 12px;}
+.lang a.on{background:var(--white);color:var(--ink);}
+main{padding:12px 44px 40px;}
+h2{font-size:20px;margin:30px 0 10px;}
+h3{font-size:17px;margin:22px 0 8px;}
+p{margin-bottom:12px;}
+ul,ol{margin:0 0 14px 22px;}
+li{margin-bottom:6px;}
+a{color:var(--ink);}
+.note{background:var(--paper);border-left:4px solid var(--ink);padding:14px 18px;margin:16px 0;}
+.note p:last-child{margin-bottom:0;}
+/* Valaszto (DESIGN.md 2.6): szkript nelkul rejtve, mert ott minden kerdes latszik. */
+.picker{display:none;margin-top:22px;}
+.js .picker{display:block;}
+.picker p{font-weight:700;margin:14px 0 6px;}
+.seg{display:flex;border:1px solid var(--line);}
+.seg button{flex:1;min-height:44px;border:0;background:var(--white);color:var(--ink);font:inherit;font-weight:700;cursor:pointer;}
+.seg button+button{border-left:1px solid var(--line);}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--white);}
+.picker .hint{font-weight:400;color:var(--muted);margin-top:12px;}
+.js.has-role .picker .hint{display:none;}
+/* Kerdes */
+details{border:1px solid var(--line);margin:0 0 10px;}
+details[open]{border-color:var(--ink);}
+summary{cursor:pointer;font-weight:700;padding:12px 16px;min-height:44px;}
+details>div{padding:0 16px 6px;}
+.plat{margin:6px 0 12px;}
+.plat-label{display:block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:2px;}
+.play{display:flex;gap:18px;align-items:center;margin:10px 0 14px;}
+.btn{display:inline-block;background:var(--ink);color:var(--white);font-weight:700;text-decoration:none;padding:10px 18px;min-height:44px;}
+.qr{width:132px;height:132px;flex:none;}
+/* Szur a valasztas: a masik szerep es a masik platform rejtve. */
+.js.role-parent [data-role="coach"],.js.role-coach [data-role="parent"]{display:none;}
+.js.plat-android [data-platform="iphone"],.js.plat-iphone [data-platform="android"]{display:none;}
+.js.plat-android .plat-label,.js.plat-iphone .plat-label{display:none;}
+footer{border-top:1px solid var(--line);padding:22px 44px 30px;font-size:14px;color:var(--muted);}
+footer a{color:var(--muted);margin-right:14px;}
+/* Script nelkul mindket nyelv latszik; a script csak az egyiket mutatja. */
+.js [data-lang]:not(.on){display:none;}
+@media (max-width:640px){header{padding:52px 16px 26px;}main{padding:8px 16px 32px;}footer{padding:20px 16px 26px;}.lang{top:12px;right:12px;}
+  /* Telefonon a sajat kepernyot nem lehet beolvasni: ott csak a gomb. */
+  .qr{display:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <nav class="lang" aria-label="Nyelv / Language"><a href="#hu" data-set="hu">HU</a><a href="#en" data-set="en">EN</a></nav>
+  <div data-lang="hu">
+    <p class="brand"><a href="./">GrowTogether SportsClub</a></p>
+    <h1>Gyakori kérdések</h1>
+    <p class="sub">Telepítés, regisztráció és az első lépések szülőknek és edzőknek.</p>
+  </div>
+  <div data-lang="en" lang="en">
+    <p class="brand"><a href="./">GrowTogether SportsClub</a></p>
+    <h1>FAQ</h1>
+    <p class="sub">Installing, signing up and first steps for parents and coaches.</p>
+  </div>
+</header>
+
+<main>
+  <div data-lang="hu">
+    <div class="picker">
+      <p>Ki vagy?</p>
+      <div class="seg"><button type="button" data-pick-role="parent" aria-pressed="false">Szülő</button><button type="button" data-pick-role="coach" aria-pressed="false">Edző</button></div>
+      <p>Milyen telefonod van?</p>
+      <div class="seg"><button type="button" data-pick-platform="android" aria-pressed="false">Android</button><button type="button" data-pick-platform="iphone" aria-pressed="false">iPhone</button></div>
+      <p class="hint">Válaszd ki, és csak a neked szóló kérdések maradnak.</p>
+    </div>
+
+    <section data-topic="start">
+      <h2>Kezdés</h2>
+
+      <details lang="hu" data-role="all">
+        <summary>Hogyan telepítem az appot?</summary>
+        <div>
+          <div class="plat" data-platform="android">
+            <span class="plat-label">Androidon</span>
+            <p>A korábban megadott e-mail-címedre értesítést küldtünk a letöltésről. Telepítsd az appot a <b>Play Áruházból</b>: a gombbal, vagy számítógépről nézve a QR-kód beolvasásával. Azzal a Google-fiókkal lépj be, amelyre az e-mail érkezett.</p>
+            <div class="play">
+              <a class="btn" href="https://play.google.com/apps/testing/com.growtogethersportslab.sportsclub">Play Áruház</a>
+              <svg class="qr" viewBox="0 0 45 45" role="img" aria-label="QR-kód a Play Áruházhoz"><rect width="45" height="45" fill="#FFFFFF"/><path fill="#151521" d="M4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM13 4h1v1h-1zM14 4h1v1h-1zM18 4h1v1h-1zM19 4h1v1h-1zM20 4h1v1h-1zM21 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM25 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM29 4h1v1h-1zM30 4h1v1h-1zM32 4h1v1h-1zM34 4h1v1h-1zM35 4h1v1h-1zM36 4h1v1h-1zM37 4h1v1h-1zM38 4h1v1h-1zM39 4h1v1h-1zM40 4h1v1h-1zM4 5h1v1h-1zM10 5h1v1h-1zM14 5h1v1h-1zM22 5h1v1h-1zM23 5h1v1h-1zM25 5h1v1h-1zM28 5h1v1h-1zM29 5h1v1h-1zM30 5h1v1h-1zM31 5h1v1h-1zM34 5h1v1h-1zM40 5h1v1h-1zM4 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM13 6h1v1h-1zM15 6h1v1h-1zM17 6h1v1h-1zM20 6h1v1h-1zM23 6h1v1h-1zM24 6h1v1h-1zM25 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM31 6h1v1h-1zM32 6h1v1h-1zM34 6h1v1h-1zM36 6h1v1h-1zM37 6h1v1h-1zM38 6h1v1h-1zM40 6h1v1h-1zM4 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM12 7h1v1h-1zM13 7h1v1h-1zM15 7h1v1h-1zM18 7h1v1h-1zM20 7h1v1h-1zM21 7h1v1h-1zM23 7h1v1h-1zM26 7h1v1h-1zM28 7h1v1h-1zM29 7h1v1h-1zM30 7h1v1h-1zM31 7h1v1h-1zM34 7h1v1h-1zM36 7h1v1h-1zM37 7h1v1h-1zM38 7h1v1h-1zM40 7h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM13 8h1v1h-1zM17 8h1v1h-1zM19 8h1v1h-1zM22 8h1v1h-1zM23 8h1v1h-1zM24 8h1v1h-1zM25 8h1v1h-1zM26 8h1v1h-1zM27 8h1v1h-1zM32 8h1v1h-1zM34 8h1v1h-1zM36 8h1v1h-1zM37 8h1v1h-1zM38 8h1v1h-1zM40 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM14 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM18 9h1v1h-1zM20 9h1v1h-1zM22 9h1v1h-1zM25 9h1v1h-1zM26 9h1v1h-1zM29 9h1v1h-1zM31 9h1v1h-1zM32 9h1v1h-1zM34 9h1v1h-1zM40 9h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM32 10h1v1h-1zM34 10h1v1h-1zM35 10h1v1h-1zM36 10h1v1h-1zM37 10h1v1h-1zM38 10h1v1h-1zM39 10h1v1h-1zM40 10h1v1h-1zM12 11h1v1h-1zM17 11h1v1h-1zM18 11h1v1h-1zM24 11h1v1h-1zM25 11h1v1h-1zM27 11h1v1h-1zM30 11h1v1h-1zM32 11h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM13 12h1v1h-1zM14 12h1v1h-1zM16 12h1v1h-1zM17 12h1v1h-1zM19 12h1v1h-1zM22 12h1v1h-1zM24 12h1v1h-1zM26 12h1v1h-1zM27 12h1v1h-1zM29 12h1v1h-1zM30 12h1v1h-1zM32 12h1v1h-1zM34 12h1v1h-1zM35 12h1v1h-1zM36 12h1v1h-1zM37 12h1v1h-1zM38 12h1v1h-1zM6 13h1v1h-1zM7 13h1v1h-1zM8 13h1v1h-1zM12 13h1v1h-1zM13 13h1v1h-1zM14 13h1v1h-1zM15 13h1v1h-1zM16 13h1v1h-1zM17 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM20 13h1v1h-1zM21 13h1v1h-1zM25 13h1v1h-1zM26 13h1v1h-1zM27 13h1v1h-1zM32 13h1v1h-1zM35 13h1v1h-1zM39 13h1v1h-1zM5 14h1v1h-1zM7 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM11 14h1v1h-1zM14 14h1v1h-1zM15 14h1v1h-1zM16 14h1v1h-1zM18 14h1v1h-1zM21 14h1v1h-1zM24 14h1v1h-1zM25 14h1v1h-1zM29 14h1v1h-1zM30 14h1v1h-1zM31 14h1v1h-1zM34 14h1v1h-1zM38 14h1v1h-1zM39 14h1v1h-1zM40 14h1v1h-1zM4 15h1v1h-1zM7 15h1v1h-1zM9 15h1v1h-1zM12 15h1v1h-1zM14 15h1v1h-1zM20 15h1v1h-1zM22 15h1v1h-1zM25 15h1v1h-1zM27 15h1v1h-1zM30 15h1v1h-1zM34 15h1v1h-1zM36 15h1v1h-1zM40 15h1v1h-1zM5 16h1v1h-1zM6 16h1v1h-1zM7 16h1v1h-1zM10 16h1v1h-1zM11 16h1v1h-1zM14 16h1v1h-1zM21 16h1v1h-1zM24 16h1v1h-1zM26 16h1v1h-1zM27 16h1v1h-1zM28 16h1v1h-1zM29 16h1v1h-1zM30 16h1v1h-1zM31 16h1v1h-1zM33 16h1v1h-1zM34 16h1v1h-1zM35 16h1v1h-1zM36 16h1v1h-1zM38 16h1v1h-1zM39 16h1v1h-1zM40 16h1v1h-1zM6 17h1v1h-1zM8 17h1v1h-1zM12 17h1v1h-1zM14 17h1v1h-1zM15 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM20 17h1v1h-1zM21 17h1v1h-1zM22 17h1v1h-1zM23 17h1v1h-1zM24 17h1v1h-1zM25 17h1v1h-1zM26 17h1v1h-1zM27 17h1v1h-1zM28 17h1v1h-1zM29 17h1v1h-1zM32 17h1v1h-1zM35 17h1v1h-1zM39 17h1v1h-1zM4 18h1v1h-1zM5 18h1v1h-1zM8 18h1v1h-1zM9 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM12 18h1v1h-1zM14 18h1v1h-1zM16 18h1v1h-1zM17 18h1v1h-1zM19 18h1v1h-1zM21 18h1v1h-1zM24 18h1v1h-1zM30 18h1v1h-1zM31 18h1v1h-1zM32 18h1v1h-1zM33 18h1v1h-1zM34 18h1v1h-1zM35 18h1v1h-1zM36 18h1v1h-1zM37 18h1v1h-1zM39 18h1v1h-1zM40 18h1v1h-1zM5 19h1v1h-1zM6 19h1v1h-1zM13 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM16 19h1v1h-1zM17 19h1v1h-1zM20 19h1v1h-1zM21 19h1v1h-1zM22 19h1v1h-1zM23 19h1v1h-1zM25 19h1v1h-1zM26 19h1v1h-1zM32 19h1v1h-1zM33 19h1v1h-1zM34 19h1v1h-1zM35 19h1v1h-1zM36 19h1v1h-1zM39 19h1v1h-1zM4 20h1v1h-1zM8 20h1v1h-1zM9 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM12 20h1v1h-1zM13 20h1v1h-1zM14 20h1v1h-1zM15 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM20 20h1v1h-1zM26 20h1v1h-1zM27 20h1v1h-1zM28 20h1v1h-1zM29 20h1v1h-1zM30 20h1v1h-1zM31 20h1v1h-1zM32 20h1v1h-1zM33 20h1v1h-1zM34 20h1v1h-1zM36 20h1v1h-1zM38 20h1v1h-1zM39 20h1v1h-1zM5 21h1v1h-1zM6 21h1v1h-1zM7 21h1v1h-1zM11 21h1v1h-1zM15 21h1v1h-1zM17 21h1v1h-1zM19 21h1v1h-1zM22 21h1v1h-1zM24 21h1v1h-1zM25 21h1v1h-1zM27 21h1v1h-1zM29 21h1v1h-1zM32 21h1v1h-1zM33 21h1v1h-1zM35 21h1v1h-1zM39 21h1v1h-1zM7 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM13 22h1v1h-1zM18 22h1v1h-1zM19 22h1v1h-1zM20 22h1v1h-1zM21 22h1v1h-1zM23 22h1v1h-1zM25 22h1v1h-1zM28 22h1v1h-1zM30 22h1v1h-1zM31 22h1v1h-1zM32 22h1v1h-1zM33 22h1v1h-1zM37 22h1v1h-1zM39 22h1v1h-1zM40 22h1v1h-1zM6 23h1v1h-1zM8 23h1v1h-1zM9 23h1v1h-1zM11 23h1v1h-1zM13 23h1v1h-1zM14 23h1v1h-1zM17 23h1v1h-1zM18 23h1v1h-1zM19 23h1v1h-1zM23 23h1v1h-1zM24 23h1v1h-1zM25 23h1v1h-1zM28 23h1v1h-1zM32 23h1v1h-1zM34 23h1v1h-1zM35 23h1v1h-1zM40 23h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM7 24h1v1h-1zM9 24h1v1h-1zM10 24h1v1h-1zM11 24h1v1h-1zM13 24h1v1h-1zM14 24h1v1h-1zM16 24h1v1h-1zM18 24h1v1h-1zM19 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM26 24h1v1h-1zM28 24h1v1h-1zM29 24h1v1h-1zM30 24h1v1h-1zM33 24h1v1h-1zM34 24h1v1h-1zM36 24h1v1h-1zM37 24h1v1h-1zM38 24h1v1h-1zM6 25h1v1h-1zM9 25h1v1h-1zM12 25h1v1h-1zM13 25h1v1h-1zM16 25h1v1h-1zM17 25h1v1h-1zM22 25h1v1h-1zM23 25h1v1h-1zM24 25h1v1h-1zM25 25h1v1h-1zM26 25h1v1h-1zM27 25h1v1h-1zM32 25h1v1h-1zM37 25h1v1h-1zM7 26h1v1h-1zM10 26h1v1h-1zM11 26h1v1h-1zM19 26h1v1h-1zM20 26h1v1h-1zM22 26h1v1h-1zM24 26h1v1h-1zM31 26h1v1h-1zM34 26h1v1h-1zM35 26h1v1h-1zM36 26h1v1h-1zM37 26h1v1h-1zM39 26h1v1h-1zM40 26h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM9 27h1v1h-1zM11 27h1v1h-1zM13 27h1v1h-1zM15 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM18 27h1v1h-1zM19 27h1v1h-1zM20 27h1v1h-1zM24 27h1v1h-1zM25 27h1v1h-1zM26 27h1v1h-1zM27 27h1v1h-1zM30 27h1v1h-1zM32 27h1v1h-1zM35 27h1v1h-1zM36 27h1v1h-1zM7 28h1v1h-1zM9 28h1v1h-1zM10 28h1v1h-1zM11 28h1v1h-1zM12 28h1v1h-1zM13 28h1v1h-1zM14 28h1v1h-1zM15 28h1v1h-1zM17 28h1v1h-1zM22 28h1v1h-1zM26 28h1v1h-1zM27 28h1v1h-1zM29 28h1v1h-1zM30 28h1v1h-1zM33 28h1v1h-1zM34 28h1v1h-1zM35 28h1v1h-1zM36 28h1v1h-1zM38 28h1v1h-1zM40 28h1v1h-1zM4 29h1v1h-1zM5 29h1v1h-1zM8 29h1v1h-1zM9 29h1v1h-1zM11 29h1v1h-1zM12 29h1v1h-1zM13 29h1v1h-1zM14 29h1v1h-1zM15 29h1v1h-1zM16 29h1v1h-1zM17 29h1v1h-1zM19 29h1v1h-1zM20 29h1v1h-1zM21 29h1v1h-1zM25 29h1v1h-1zM27 29h1v1h-1zM32 29h1v1h-1zM33 29h1v1h-1zM35 29h1v1h-1zM38 29h1v1h-1zM4 30h1v1h-1zM6 30h1v1h-1zM7 30h1v1h-1zM9 30h1v1h-1zM10 30h1v1h-1zM11 30h1v1h-1zM14 30h1v1h-1zM16 30h1v1h-1zM17 30h1v1h-1zM18 30h1v1h-1zM21 30h1v1h-1zM30 30h1v1h-1zM31 30h1v1h-1zM34 30h1v1h-1zM35 30h1v1h-1zM38 30h1v1h-1zM39 30h1v1h-1zM40 30h1v1h-1zM4 31h1v1h-1zM6 31h1v1h-1zM7 31h1v1h-1zM11 31h1v1h-1zM13 31h1v1h-1zM18 31h1v1h-1zM20 31h1v1h-1zM23 31h1v1h-1zM25 31h1v1h-1zM26 31h1v1h-1zM27 31h1v1h-1zM28 31h1v1h-1zM30 31h1v1h-1zM31 31h1v1h-1zM33 31h1v1h-1zM34 31h1v1h-1zM35 31h1v1h-1zM39 31h1v1h-1zM40 31h1v1h-1zM4 32h1v1h-1zM9 32h1v1h-1zM10 32h1v1h-1zM12 32h1v1h-1zM14 32h1v1h-1zM15 32h1v1h-1zM21 32h1v1h-1zM28 32h1v1h-1zM29 32h1v1h-1zM31 32h1v1h-1zM32 32h1v1h-1zM33 32h1v1h-1zM34 32h1v1h-1zM35 32h1v1h-1zM36 32h1v1h-1zM37 32h1v1h-1zM38 32h1v1h-1zM12 33h1v1h-1zM13 33h1v1h-1zM14 33h1v1h-1zM15 33h1v1h-1zM16 33h1v1h-1zM18 33h1v1h-1zM20 33h1v1h-1zM21 33h1v1h-1zM22 33h1v1h-1zM23 33h1v1h-1zM24 33h1v1h-1zM27 33h1v1h-1zM31 33h1v1h-1zM32 33h1v1h-1zM36 33h1v1h-1zM37 33h1v1h-1zM39 33h1v1h-1zM4 34h1v1h-1zM5 34h1v1h-1zM6 34h1v1h-1zM7 34h1v1h-1zM8 34h1v1h-1zM9 34h1v1h-1zM10 34h1v1h-1zM14 34h1v1h-1zM15 34h1v1h-1zM18 34h1v1h-1zM19 34h1v1h-1zM20 34h1v1h-1zM21 34h1v1h-1zM25 34h1v1h-1zM26 34h1v1h-1zM29 34h1v1h-1zM32 34h1v1h-1zM34 34h1v1h-1zM36 34h1v1h-1zM38 34h1v1h-1zM39 34h1v1h-1zM40 34h1v1h-1zM4 35h1v1h-1zM10 35h1v1h-1zM12 35h1v1h-1zM14 35h1v1h-1zM15 35h1v1h-1zM16 35h1v1h-1zM17 35h1v1h-1zM20 35h1v1h-1zM21 35h1v1h-1zM22 35h1v1h-1zM24 35h1v1h-1zM25 35h1v1h-1zM27 35h1v1h-1zM28 35h1v1h-1zM31 35h1v1h-1zM32 35h1v1h-1zM36 35h1v1h-1zM37 35h1v1h-1zM39 35h1v1h-1zM4 36h1v1h-1zM6 36h1v1h-1zM7 36h1v1h-1zM8 36h1v1h-1zM10 36h1v1h-1zM12 36h1v1h-1zM14 36h1v1h-1zM15 36h1v1h-1zM20 36h1v1h-1zM26 36h1v1h-1zM29 36h1v1h-1zM31 36h1v1h-1zM32 36h1v1h-1zM33 36h1v1h-1zM34 36h1v1h-1zM35 36h1v1h-1zM36 36h1v1h-1zM38 36h1v1h-1zM39 36h1v1h-1zM40 36h1v1h-1zM4 37h1v1h-1zM6 37h1v1h-1zM7 37h1v1h-1zM8 37h1v1h-1zM10 37h1v1h-1zM12 37h1v1h-1zM13 37h1v1h-1zM17 37h1v1h-1zM18 37h1v1h-1zM19 37h1v1h-1zM22 37h1v1h-1zM23 37h1v1h-1zM24 37h1v1h-1zM26 37h1v1h-1zM27 37h1v1h-1zM29 37h1v1h-1zM33 37h1v1h-1zM34 37h1v1h-1zM36 37h1v1h-1zM40 37h1v1h-1zM4 38h1v1h-1zM6 38h1v1h-1zM7 38h1v1h-1zM8 38h1v1h-1zM10 38h1v1h-1zM12 38h1v1h-1zM13 38h1v1h-1zM14 38h1v1h-1zM16 38h1v1h-1zM17 38h1v1h-1zM18 38h1v1h-1zM19 38h1v1h-1zM20 38h1v1h-1zM21 38h1v1h-1zM22 38h1v1h-1zM24 38h1v1h-1zM26 38h1v1h-1zM28 38h1v1h-1zM29 38h1v1h-1zM30 38h1v1h-1zM31 38h1v1h-1zM32 38h1v1h-1zM33 38h1v1h-1zM38 38h1v1h-1zM39 38h1v1h-1zM40 38h1v1h-1zM4 39h1v1h-1zM10 39h1v1h-1zM13 39h1v1h-1zM15 39h1v1h-1zM17 39h1v1h-1zM18 39h1v1h-1zM19 39h1v1h-1zM24 39h1v1h-1zM25 39h1v1h-1zM26 39h1v1h-1zM27 39h1v1h-1zM32 39h1v1h-1zM34 39h1v1h-1zM36 39h1v1h-1zM40 39h1v1h-1zM4 40h1v1h-1zM5 40h1v1h-1zM6 40h1v1h-1zM7 40h1v1h-1zM8 40h1v1h-1zM9 40h1v1h-1zM10 40h1v1h-1zM12 40h1v1h-1zM13 40h1v1h-1zM14 40h1v1h-1zM16 40h1v1h-1zM19 40h1v1h-1zM21 40h1v1h-1zM24 40h1v1h-1zM26 40h1v1h-1zM27 40h1v1h-1zM28 40h1v1h-1zM29 40h1v1h-1zM30 40h1v1h-1zM33 40h1v1h-1zM36 40h1v1h-1zM37 40h1v1h-1zM38 40h1v1h-1zM39 40h1v1h-1zM40 40h1v1h-1z"/></svg>
+            </div>
+          </div>
+          <div class="plat" data-platform="iphone">
+            <span class="plat-label">iPhone-on</span>
+            <p>A korábban megadott e-mail-címedre meghívót küldtünk. Telepítsd az App Store-ból a <b>TestFlight</b> appot, nyisd meg a meghívót, és a TestFlightból telepítsd a <b>GrowTogether SportsClubot</b>.</p>
+          </div>
+        </div>
+      </details>
+
+      <h3 data-role="parent">Szülőknek</h3>
+
+      <details lang="hu" data-role="parent">
+        <summary>Hogyan regisztrálok?</summary>
+        <div>
+          <ol>
+            <li>Az edződtől kapsz egy belépőkódot. Erre lesz szükséged a regisztrációhoz.</li>
+            <li>Nyisd meg az appot, válaszd az <b>Új vagyok</b> fület, és írd be vagy illeszd be a kódot.</li>
+            <li>Add meg a saját adataidat, az e-mail-címedet és egy jelszót. Fogadd el az adatkezelési tájékoztatót a saját és a gyermeked nevében, majd nyomd meg a <b>Fiók létrehozása</b> gombot.</li>
+            <li>Engedélyezd az értesítéseket.</li>
+          </ol>
+          <p>Ezután rögtön látod a gyermeked adatait; külön jóváhagyásra nincs szükség.</p>
+        </div>
+      </details>
+
+      <details lang="hu" data-role="parent">
+        <summary>Hogyan léphet be a gyerekem is?</summary>
+        <div>
+          <ol>
+            <li>Nyisd meg a <b>Gyerekeim</b> fület, koppints a gyereked kártyájára, és nyomd meg a <b>Gyerek-kód készítése</b> gombot.</li>
+            <li>Mutasd meg neki a kódot, vagy küldd el közvetlen üzenetben. A kód egyszer használható, és 7 napig érvényes.</li>
+            <li>A gyereked telepítse a telefonjára az appot. A meghívót a már megadott e-mail-címére küldjük; a telepítés ugyanúgy megy, mint nálad (lásd: Hogyan telepítem az appot?).</li>
+            <li>A gyereked megnyitja az appot, az <b>Új vagyok</b> fülön beírja vagy beilleszti a kódot, vagy a QR-ikonnal beolvassa a képernyődről.</li>
+            <li>Megadja az e-mail-címét és egy jelszót, majd megnyomja a <b>Fiók létrehozása</b> gombot. Az adatkezelési tájékoztatót neki nem kell elfogadnia: a te hozzájárulásod vonatkozik rá.</li>
+          </ol>
+          <p>Amikor belépett, értesítést kapsz. A kiadott kódokat később a <b>Több…</b> → <b>Gyerek-kódjaim</b> alatt találod.</p>
+        </div>
+      </details>
+
+      <details lang="hu" data-role="parent">
+        <summary>Mit tegyek, ha lejárt vagy elveszett a kód?</summary>
+        <div>
+          <p>A kód egyszer használható, és 7 napig érvényes. Ha lejárt vagy elveszett, kérj újat az edződtől: az új kód a régit érvényteleníti. A gyereked kódját te magad készítheted újra a <b>Több…</b> → <b>Gyerek-kódjaim</b> alatt.</p>
+        </div>
+      </details>
+
+      <h3 data-role="coach">Edzőknek</h3>
+
+      <details lang="hu" data-role="coach">
+        <summary>Hogyan regisztrálok?</summary>
+        <div>
+          <ol>
+            <li>Az edzői belépőkódot az egyesülettől kapott e-mailben találod.</li>
+            <li>Nyisd meg az appot, válaszd az <b>Új vagyok</b> fület, és írd be vagy illeszd be a kódot.</li>
+            <li>Add meg a saját adataidat, az e-mail-címedet és egy jelszót. Fogadd el az adatkezelési tájékoztatót, majd nyomd meg a <b>Fiók létrehozása</b> gombot.</li>
+            <li>Engedélyezd az értesítéseket.</li>
+          </ol>
+          <p>Ezután az edzői kérelmed jóváhagyásra vár.</p>
+        </div>
+      </details>
+
+      <details lang="hu" data-role="coach">
+        <summary>Mikor látom az edzői funkciókat?</summary>
+        <div>
+          <p>Amint az egyesület vagy a szakosztályod vezetője jóváhagyta az edzői kérelmedet. Ha sokáig nem történik meg, szólj neki.</p>
+        </div>
+      </details>
+
+      <details lang="hu" data-role="coach">
+        <summary>Hogyan veszek fel kiskorú sportolót?</summary>
+        <div>
+          <ol>
+            <li>Nyisd meg a <b>Sportolók</b> fület, és nyomd meg az <b>Új sportoló</b> gombot.</li>
+            <li>Add meg a sportoló teljes nevét és születési dátumát; ez a kettő kötelező.</li>
+            <li>A <b>Gondviselők</b> alatt add meg a szülő nevét, ennyi elég. Testvérnél a gépeléskor felajánlott, már nyilvántartott gondviselőt válaszd, így a család egy kódot kap. Utána nyomd meg a <b>Mentés</b> gombot.</li>
+            <li>A „… felvéve” kártyán a gondviselő mellett nyomd meg a <b>Kód készítése</b> gombot. Ha a szülő már belépett az appba, kód nem kell: rögtön látja a gyereket.</li>
+            <li>Add át a kódot a szülőnek személyesen vagy közvetlen üzenetben: a <b>Másolás</b> vagy a <b>Megosztás</b> gombbal, vagy mutasd meg neki a QR-kódot. A kód egyszer használható, és 7 napig érvényes.</li>
+            <li>A sportoló adatlapján a <b>Csoportba sorolás</b> kártyán nyomd meg a <b>Hozzáadás csoporthoz</b> gombot. Csoport nélkül a sportoló nem kap eseményt.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details lang="hu" data-role="coach">
+        <summary>Mit tegyek, ha kimaradt vagy lejárt a kód?</summary>
+        <div>
+          <p>A <b>Sportolók</b> listán a <b>Kód kell</b> jelvény mutatja, kinek a családja vár még kódra. Kódot később a <b>Több…</b> → <b>Csoportjaim</b> → <b>Kódok kiadása</b> alatt is adhatsz; az új kód a régit érvényteleníti.</p>
+        </div>
+      </details>
+
+      <details lang="hu" data-role="all">
+        <summary>Kihez forduljak, ha elakadtam?</summary>
+        <div>
+          <p>Írj nekünk: <a href="mailto:support@growtogethersportsclub.com"><b>support@growtogethersportsclub.com</b></a>. Írd meg, melyik egyesület tagja vagy, milyen szerepben, és milyen telefonon használod az appot. További tudnivalók a <a href="support">Támogatás</a> oldalon.</p>
+        </div>
+      </details>
+    </section>
+  </div>
+
+  <div data-lang="en" lang="en">
+    <div class="picker">
+      <p>Who are you?</p>
+      <div class="seg"><button type="button" data-pick-role="parent" aria-pressed="false">Parent</button><button type="button" data-pick-role="coach" aria-pressed="false">Coach</button></div>
+      <p>Which phone do you have?</p>
+      <div class="seg"><button type="button" data-pick-platform="android" aria-pressed="false">Android</button><button type="button" data-pick-platform="iphone" aria-pressed="false">iPhone</button></div>
+      <p class="hint">Choose, and only the questions meant for you remain.</p>
+    </div>
+
+    <section data-topic="start">
+      <h2>Getting started</h2>
+
+      <details lang="en" data-role="all">
+        <summary>How do I install the app?</summary>
+        <div>
+          <div class="plat" data-platform="android">
+            <span class="plat-label">On Android</span>
+            <p>We emailed the address you gave us earlier about the download. Install the app from <b>Google Play</b>: with the button, or, viewing this page on a computer, by scanning the QR code. Sign in with the Google account the email was sent to.</p>
+            <div class="play">
+              <a class="btn" href="https://play.google.com/apps/testing/com.growtogethersportslab.sportsclub">Google Play</a>
+              <svg class="qr" viewBox="0 0 45 45" role="img" aria-label="QR code for Google Play"><rect width="45" height="45" fill="#FFFFFF"/><path fill="#151521" d="M4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM13 4h1v1h-1zM14 4h1v1h-1zM18 4h1v1h-1zM19 4h1v1h-1zM20 4h1v1h-1zM21 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM25 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM29 4h1v1h-1zM30 4h1v1h-1zM32 4h1v1h-1zM34 4h1v1h-1zM35 4h1v1h-1zM36 4h1v1h-1zM37 4h1v1h-1zM38 4h1v1h-1zM39 4h1v1h-1zM40 4h1v1h-1zM4 5h1v1h-1zM10 5h1v1h-1zM14 5h1v1h-1zM22 5h1v1h-1zM23 5h1v1h-1zM25 5h1v1h-1zM28 5h1v1h-1zM29 5h1v1h-1zM30 5h1v1h-1zM31 5h1v1h-1zM34 5h1v1h-1zM40 5h1v1h-1zM4 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM13 6h1v1h-1zM15 6h1v1h-1zM17 6h1v1h-1zM20 6h1v1h-1zM23 6h1v1h-1zM24 6h1v1h-1zM25 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM31 6h1v1h-1zM32 6h1v1h-1zM34 6h1v1h-1zM36 6h1v1h-1zM37 6h1v1h-1zM38 6h1v1h-1zM40 6h1v1h-1zM4 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM12 7h1v1h-1zM13 7h1v1h-1zM15 7h1v1h-1zM18 7h1v1h-1zM20 7h1v1h-1zM21 7h1v1h-1zM23 7h1v1h-1zM26 7h1v1h-1zM28 7h1v1h-1zM29 7h1v1h-1zM30 7h1v1h-1zM31 7h1v1h-1zM34 7h1v1h-1zM36 7h1v1h-1zM37 7h1v1h-1zM38 7h1v1h-1zM40 7h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM13 8h1v1h-1zM17 8h1v1h-1zM19 8h1v1h-1zM22 8h1v1h-1zM23 8h1v1h-1zM24 8h1v1h-1zM25 8h1v1h-1zM26 8h1v1h-1zM27 8h1v1h-1zM32 8h1v1h-1zM34 8h1v1h-1zM36 8h1v1h-1zM37 8h1v1h-1zM38 8h1v1h-1zM40 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM12 9h1v1h-1zM14 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM18 9h1v1h-1zM20 9h1v1h-1zM22 9h1v1h-1zM25 9h1v1h-1zM26 9h1v1h-1zM29 9h1v1h-1zM31 9h1v1h-1zM32 9h1v1h-1zM34 9h1v1h-1zM40 9h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM32 10h1v1h-1zM34 10h1v1h-1zM35 10h1v1h-1zM36 10h1v1h-1zM37 10h1v1h-1zM38 10h1v1h-1zM39 10h1v1h-1zM40 10h1v1h-1zM12 11h1v1h-1zM17 11h1v1h-1zM18 11h1v1h-1zM24 11h1v1h-1zM25 11h1v1h-1zM27 11h1v1h-1zM30 11h1v1h-1zM32 11h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM13 12h1v1h-1zM14 12h1v1h-1zM16 12h1v1h-1zM17 12h1v1h-1zM19 12h1v1h-1zM22 12h1v1h-1zM24 12h1v1h-1zM26 12h1v1h-1zM27 12h1v1h-1zM29 12h1v1h-1zM30 12h1v1h-1zM32 12h1v1h-1zM34 12h1v1h-1zM35 12h1v1h-1zM36 12h1v1h-1zM37 12h1v1h-1zM38 12h1v1h-1zM6 13h1v1h-1zM7 13h1v1h-1zM8 13h1v1h-1zM12 13h1v1h-1zM13 13h1v1h-1zM14 13h1v1h-1zM15 13h1v1h-1zM16 13h1v1h-1zM17 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM20 13h1v1h-1zM21 13h1v1h-1zM25 13h1v1h-1zM26 13h1v1h-1zM27 13h1v1h-1zM32 13h1v1h-1zM35 13h1v1h-1zM39 13h1v1h-1zM5 14h1v1h-1zM7 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM11 14h1v1h-1zM14 14h1v1h-1zM15 14h1v1h-1zM16 14h1v1h-1zM18 14h1v1h-1zM21 14h1v1h-1zM24 14h1v1h-1zM25 14h1v1h-1zM29 14h1v1h-1zM30 14h1v1h-1zM31 14h1v1h-1zM34 14h1v1h-1zM38 14h1v1h-1zM39 14h1v1h-1zM40 14h1v1h-1zM4 15h1v1h-1zM7 15h1v1h-1zM9 15h1v1h-1zM12 15h1v1h-1zM14 15h1v1h-1zM20 15h1v1h-1zM22 15h1v1h-1zM25 15h1v1h-1zM27 15h1v1h-1zM30 15h1v1h-1zM34 15h1v1h-1zM36 15h1v1h-1zM40 15h1v1h-1zM5 16h1v1h-1zM6 16h1v1h-1zM7 16h1v1h-1zM10 16h1v1h-1zM11 16h1v1h-1zM14 16h1v1h-1zM21 16h1v1h-1zM24 16h1v1h-1zM26 16h1v1h-1zM27 16h1v1h-1zM28 16h1v1h-1zM29 16h1v1h-1zM30 16h1v1h-1zM31 16h1v1h-1zM33 16h1v1h-1zM34 16h1v1h-1zM35 16h1v1h-1zM36 16h1v1h-1zM38 16h1v1h-1zM39 16h1v1h-1zM40 16h1v1h-1zM6 17h1v1h-1zM8 17h1v1h-1zM12 17h1v1h-1zM14 17h1v1h-1zM15 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM20 17h1v1h-1zM21 17h1v1h-1zM22 17h1v1h-1zM23 17h1v1h-1zM24 17h1v1h-1zM25 17h1v1h-1zM26 17h1v1h-1zM27 17h1v1h-1zM28 17h1v1h-1zM29 17h1v1h-1zM32 17h1v1h-1zM35 17h1v1h-1zM39 17h1v1h-1zM4 18h1v1h-1zM5 18h1v1h-1zM8 18h1v1h-1zM9 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM12 18h1v1h-1zM14 18h1v1h-1zM16 18h1v1h-1zM17 18h1v1h-1zM19 18h1v1h-1zM21 18h1v1h-1zM24 18h1v1h-1zM30 18h1v1h-1zM31 18h1v1h-1zM32 18h1v1h-1zM33 18h1v1h-1zM34 18h1v1h-1zM35 18h1v1h-1zM36 18h1v1h-1zM37 18h1v1h-1zM39 18h1v1h-1zM40 18h1v1h-1zM5 19h1v1h-1zM6 19h1v1h-1zM13 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM16 19h1v1h-1zM17 19h1v1h-1zM20 19h1v1h-1zM21 19h1v1h-1zM22 19h1v1h-1zM23 19h1v1h-1zM25 19h1v1h-1zM26 19h1v1h-1zM32 19h1v1h-1zM33 19h1v1h-1zM34 19h1v1h-1zM35 19h1v1h-1zM36 19h1v1h-1zM39 19h1v1h-1zM4 20h1v1h-1zM8 20h1v1h-1zM9 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM12 20h1v1h-1zM13 20h1v1h-1zM14 20h1v1h-1zM15 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM20 20h1v1h-1zM26 20h1v1h-1zM27 20h1v1h-1zM28 20h1v1h-1zM29 20h1v1h-1zM30 20h1v1h-1zM31 20h1v1h-1zM32 20h1v1h-1zM33 20h1v1h-1zM34 20h1v1h-1zM36 20h1v1h-1zM38 20h1v1h-1zM39 20h1v1h-1zM5 21h1v1h-1zM6 21h1v1h-1zM7 21h1v1h-1zM11 21h1v1h-1zM15 21h1v1h-1zM17 21h1v1h-1zM19 21h1v1h-1zM22 21h1v1h-1zM24 21h1v1h-1zM25 21h1v1h-1zM27 21h1v1h-1zM29 21h1v1h-1zM32 21h1v1h-1zM33 21h1v1h-1zM35 21h1v1h-1zM39 21h1v1h-1zM7 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM12 22h1v1h-1zM13 22h1v1h-1zM18 22h1v1h-1zM19 22h1v1h-1zM20 22h1v1h-1zM21 22h1v1h-1zM23 22h1v1h-1zM25 22h1v1h-1zM28 22h1v1h-1zM30 22h1v1h-1zM31 22h1v1h-1zM32 22h1v1h-1zM33 22h1v1h-1zM37 22h1v1h-1zM39 22h1v1h-1zM40 22h1v1h-1zM6 23h1v1h-1zM8 23h1v1h-1zM9 23h1v1h-1zM11 23h1v1h-1zM13 23h1v1h-1zM14 23h1v1h-1zM17 23h1v1h-1zM18 23h1v1h-1zM19 23h1v1h-1zM23 23h1v1h-1zM24 23h1v1h-1zM25 23h1v1h-1zM28 23h1v1h-1zM32 23h1v1h-1zM34 23h1v1h-1zM35 23h1v1h-1zM40 23h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM7 24h1v1h-1zM9 24h1v1h-1zM10 24h1v1h-1zM11 24h1v1h-1zM13 24h1v1h-1zM14 24h1v1h-1zM16 24h1v1h-1zM18 24h1v1h-1zM19 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM26 24h1v1h-1zM28 24h1v1h-1zM29 24h1v1h-1zM30 24h1v1h-1zM33 24h1v1h-1zM34 24h1v1h-1zM36 24h1v1h-1zM37 24h1v1h-1zM38 24h1v1h-1zM6 25h1v1h-1zM9 25h1v1h-1zM12 25h1v1h-1zM13 25h1v1h-1zM16 25h1v1h-1zM17 25h1v1h-1zM22 25h1v1h-1zM23 25h1v1h-1zM24 25h1v1h-1zM25 25h1v1h-1zM26 25h1v1h-1zM27 25h1v1h-1zM32 25h1v1h-1zM37 25h1v1h-1zM7 26h1v1h-1zM10 26h1v1h-1zM11 26h1v1h-1zM19 26h1v1h-1zM20 26h1v1h-1zM22 26h1v1h-1zM24 26h1v1h-1zM31 26h1v1h-1zM34 26h1v1h-1zM35 26h1v1h-1zM36 26h1v1h-1zM37 26h1v1h-1zM39 26h1v1h-1zM40 26h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM9 27h1v1h-1zM11 27h1v1h-1zM13 27h1v1h-1zM15 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM18 27h1v1h-1zM19 27h1v1h-1zM20 27h1v1h-1zM24 27h1v1h-1zM25 27h1v1h-1zM26 27h1v1h-1zM27 27h1v1h-1zM30 27h1v1h-1zM32 27h1v1h-1zM35 27h1v1h-1zM36 27h1v1h-1zM7 28h1v1h-1zM9 28h1v1h-1zM10 28h1v1h-1zM11 28h1v1h-1zM12 28h1v1h-1zM13 28h1v1h-1zM14 28h1v1h-1zM15 28h1v1h-1zM17 28h1v1h-1zM22 28h1v1h-1zM26 28h1v1h-1zM27 28h1v1h-1zM29 28h1v1h-1zM30 28h1v1h-1zM33 28h1v1h-1zM34 28h1v1h-1zM35 28h1v1h-1zM36 28h1v1h-1zM38 28h1v1h-1zM40 28h1v1h-1zM4 29h1v1h-1zM5 29h1v1h-1zM8 29h1v1h-1zM9 29h1v1h-1zM11 29h1v1h-1zM12 29h1v1h-1zM13 29h1v1h-1zM14 29h1v1h-1zM15 29h1v1h-1zM16 29h1v1h-1zM17 29h1v1h-1zM19 29h1v1h-1zM20 29h1v1h-1zM21 29h1v1h-1zM25 29h1v1h-1zM27 29h1v1h-1zM32 29h1v1h-1zM33 29h1v1h-1zM35 29h1v1h-1zM38 29h1v1h-1zM4 30h1v1h-1zM6 30h1v1h-1zM7 30h1v1h-1zM9 30h1v1h-1zM10 30h1v1h-1zM11 30h1v1h-1zM14 30h1v1h-1zM16 30h1v1h-1zM17 30h1v1h-1zM18 30h1v1h-1zM21 30h1v1h-1zM30 30h1v1h-1zM31 30h1v1h-1zM34 30h1v1h-1zM35 30h1v1h-1zM38 30h1v1h-1zM39 30h1v1h-1zM40 30h1v1h-1zM4 31h1v1h-1zM6 31h1v1h-1zM7 31h1v1h-1zM11 31h1v1h-1zM13 31h1v1h-1zM18 31h1v1h-1zM20 31h1v1h-1zM23 31h1v1h-1zM25 31h1v1h-1zM26 31h1v1h-1zM27 31h1v1h-1zM28 31h1v1h-1zM30 31h1v1h-1zM31 31h1v1h-1zM33 31h1v1h-1zM34 31h1v1h-1zM35 31h1v1h-1zM39 31h1v1h-1zM40 31h1v1h-1zM4 32h1v1h-1zM9 32h1v1h-1zM10 32h1v1h-1zM12 32h1v1h-1zM14 32h1v1h-1zM15 32h1v1h-1zM21 32h1v1h-1zM28 32h1v1h-1zM29 32h1v1h-1zM31 32h1v1h-1zM32 32h1v1h-1zM33 32h1v1h-1zM34 32h1v1h-1zM35 32h1v1h-1zM36 32h1v1h-1zM37 32h1v1h-1zM38 32h1v1h-1zM12 33h1v1h-1zM13 33h1v1h-1zM14 33h1v1h-1zM15 33h1v1h-1zM16 33h1v1h-1zM18 33h1v1h-1zM20 33h1v1h-1zM21 33h1v1h-1zM22 33h1v1h-1zM23 33h1v1h-1zM24 33h1v1h-1zM27 33h1v1h-1zM31 33h1v1h-1zM32 33h1v1h-1zM36 33h1v1h-1zM37 33h1v1h-1zM39 33h1v1h-1zM4 34h1v1h-1zM5 34h1v1h-1zM6 34h1v1h-1zM7 34h1v1h-1zM8 34h1v1h-1zM9 34h1v1h-1zM10 34h1v1h-1zM14 34h1v1h-1zM15 34h1v1h-1zM18 34h1v1h-1zM19 34h1v1h-1zM20 34h1v1h-1zM21 34h1v1h-1zM25 34h1v1h-1zM26 34h1v1h-1zM29 34h1v1h-1zM32 34h1v1h-1zM34 34h1v1h-1zM36 34h1v1h-1zM38 34h1v1h-1zM39 34h1v1h-1zM40 34h1v1h-1zM4 35h1v1h-1zM10 35h1v1h-1zM12 35h1v1h-1zM14 35h1v1h-1zM15 35h1v1h-1zM16 35h1v1h-1zM17 35h1v1h-1zM20 35h1v1h-1zM21 35h1v1h-1zM22 35h1v1h-1zM24 35h1v1h-1zM25 35h1v1h-1zM27 35h1v1h-1zM28 35h1v1h-1zM31 35h1v1h-1zM32 35h1v1h-1zM36 35h1v1h-1zM37 35h1v1h-1zM39 35h1v1h-1zM4 36h1v1h-1zM6 36h1v1h-1zM7 36h1v1h-1zM8 36h1v1h-1zM10 36h1v1h-1zM12 36h1v1h-1zM14 36h1v1h-1zM15 36h1v1h-1zM20 36h1v1h-1zM26 36h1v1h-1zM29 36h1v1h-1zM31 36h1v1h-1zM32 36h1v1h-1zM33 36h1v1h-1zM34 36h1v1h-1zM35 36h1v1h-1zM36 36h1v1h-1zM38 36h1v1h-1zM39 36h1v1h-1zM40 36h1v1h-1zM4 37h1v1h-1zM6 37h1v1h-1zM7 37h1v1h-1zM8 37h1v1h-1zM10 37h1v1h-1zM12 37h1v1h-1zM13 37h1v1h-1zM17 37h1v1h-1zM18 37h1v1h-1zM19 37h1v1h-1zM22 37h1v1h-1zM23 37h1v1h-1zM24 37h1v1h-1zM26 37h1v1h-1zM27 37h1v1h-1zM29 37h1v1h-1zM33 37h1v1h-1zM34 37h1v1h-1zM36 37h1v1h-1zM40 37h1v1h-1zM4 38h1v1h-1zM6 38h1v1h-1zM7 38h1v1h-1zM8 38h1v1h-1zM10 38h1v1h-1zM12 38h1v1h-1zM13 38h1v1h-1zM14 38h1v1h-1zM16 38h1v1h-1zM17 38h1v1h-1zM18 38h1v1h-1zM19 38h1v1h-1zM20 38h1v1h-1zM21 38h1v1h-1zM22 38h1v1h-1zM24 38h1v1h-1zM26 38h1v1h-1zM28 38h1v1h-1zM29 38h1v1h-1zM30 38h1v1h-1zM31 38h1v1h-1zM32 38h1v1h-1zM33 38h1v1h-1zM38 38h1v1h-1zM39 38h1v1h-1zM40 38h1v1h-1zM4 39h1v1h-1zM10 39h1v1h-1zM13 39h1v1h-1zM15 39h1v1h-1zM17 39h1v1h-1zM18 39h1v1h-1zM19 39h1v1h-1zM24 39h1v1h-1zM25 39h1v1h-1zM26 39h1v1h-1zM27 39h1v1h-1zM32 39h1v1h-1zM34 39h1v1h-1zM36 39h1v1h-1zM40 39h1v1h-1zM4 40h1v1h-1zM5 40h1v1h-1zM6 40h1v1h-1zM7 40h1v1h-1zM8 40h1v1h-1zM9 40h1v1h-1zM10 40h1v1h-1zM12 40h1v1h-1zM13 40h1v1h-1zM14 40h1v1h-1zM16 40h1v1h-1zM19 40h1v1h-1zM21 40h1v1h-1zM24 40h1v1h-1zM26 40h1v1h-1zM27 40h1v1h-1zM28 40h1v1h-1zM29 40h1v1h-1zM30 40h1v1h-1zM33 40h1v1h-1zM36 40h1v1h-1zM37 40h1v1h-1zM38 40h1v1h-1zM39 40h1v1h-1zM40 40h1v1h-1z"/></svg>
+            </div>
+          </div>
+          <div class="plat" data-platform="iphone">
+            <span class="plat-label">On iPhone</span>
+            <p>We emailed an invitation to the address you gave us earlier. Install the <b>TestFlight</b> app from the App Store, open the invitation, and install <b>GrowTogether SportsClub</b> from TestFlight.</p>
+          </div>
+        </div>
+      </details>
+
+      <h3 data-role="parent">For parents</h3>
+
+      <details lang="en" data-role="parent">
+        <summary>How do I sign up?</summary>
+        <div>
+          <ol>
+            <li>Your coach gives you an access code. You need it to sign up.</li>
+            <li>Open the app, choose the <b>I'm new</b> tab, and type or paste the code.</li>
+            <li>Enter your details, your email address and a password. Accept the privacy notice for yourself and on behalf of your child, then tap <b>Create account</b>.</li>
+            <li>Allow notifications.</li>
+          </ol>
+          <p>You then see your child's details right away; no separate approval is needed.</p>
+        </div>
+      </details>
+
+      <details lang="en" data-role="parent">
+        <summary>How can my child sign in too?</summary>
+        <div>
+          <ol>
+            <li>Open the <b>My children</b> tab, tap your child's card, and tap <b>Create child code</b>.</li>
+            <li>Show your child the code, or send it in a direct message. The code can be used once and is valid for 7 days.</li>
+            <li>Your child installs the app on their phone. We send the invitation to the email address already given for them; installing works the same way as for you (see: How do I install the app?).</li>
+            <li>Your child opens the app and, on the <b>I'm new</b> tab, types or pastes the code, or scans it from your screen with the QR icon.</li>
+            <li>They enter their email address and a password, then tap <b>Create account</b>. They don't need to accept the privacy notice: your consent covers them.</li>
+          </ol>
+          <p>You get a notification when they have signed in. You can find the codes you issued later under <b>More…</b> → <b>My children's codes</b>.</p>
+        </div>
+      </details>
+
+      <details lang="en" data-role="parent">
+        <summary>What if the code expired or got lost?</summary>
+        <div>
+          <p>A code can be used once and is valid for 7 days. If it expired or got lost, ask your coach for a new one: the new code invalidates the old one. You can create a new code for your child yourself under <b>More…</b> → <b>My children's codes</b>.</p>
+        </div>
+      </details>
+
+      <h3 data-role="coach">For coaches</h3>
+
+      <details lang="en" data-role="coach">
+        <summary>How do I sign up?</summary>
+        <div>
+          <ol>
+            <li>You find your coach access code in the email you got from the club.</li>
+            <li>Open the app, choose the <b>I'm new</b> tab, and type or paste the code.</li>
+            <li>Enter your details, your email address and a password. Accept the privacy notice, then tap <b>Create account</b>.</li>
+            <li>Allow notifications.</li>
+          </ol>
+          <p>Your coach request then waits for approval.</p>
+        </div>
+      </details>
+
+      <details lang="en" data-role="coach">
+        <summary>When do I see the coach features?</summary>
+        <div>
+          <p>As soon as the club manager or your section lead has approved your coach request. If it takes long, let them know.</p>
+        </div>
+      </details>
+
+      <details lang="en" data-role="coach">
+        <summary>How do I add an underage athlete?</summary>
+        <div>
+          <ol>
+            <li>Open the <b>Athletes</b> tab and tap <b>New athlete</b>.</li>
+            <li>Enter the athlete's full name and date of birth; both are required.</li>
+            <li>Under <b>Guardians</b>, enter the parent's name; that's enough. For a sibling, choose the already registered guardian offered as you type, so the family gets one code. Then tap <b>Save</b>.</li>
+            <li>On the “… added” card, tap <b>Create code</b> next to the guardian. If the parent has already signed in to the app, no code is needed: they see the child right away.</li>
+            <li>Give the code to the parent in person or in a direct message: with <b>Copy</b> or <b>Share</b>, or show them the QR code. The code can be used once and is valid for 7 days.</li>
+            <li>On the athlete's page, on the <b>Group assignment</b> card, tap <b>Add to group</b>. Without a group, the athlete gets no events.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details lang="en" data-role="coach">
+        <summary>What if a code was skipped or expired?</summary>
+        <div>
+          <p>On the <b>Athletes</b> list, the <b>Code needed</b> badge shows whose family is still waiting for a code. You can also issue codes later under <b>More…</b> → <b>My groups</b> → <b>Issue codes</b>; a new code invalidates the old one.</p>
+        </div>
+      </details>
+
+      <details lang="en" data-role="all">
+        <summary>Who can I ask if I'm stuck?</summary>
+        <div>
+          <p>Write to us: <a href="mailto:support@growtogethersportsclub.com"><b>support@growtogethersportsclub.com</b></a>. Tell us which club you belong to, in what role, and which phone you use the app on. More on the <a href="support">Support</a> page.</p>
+        </div>
+      </details>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <a href="./">GrowTogether SportsClub</a><a href="privacy">Privacy</a><a href="support">Support</a><a href="delete-account">Delete account</a><a href="faq">FAQ</a>
+  · <a href="mailto:support@growtogethersportsclub.com">support@growtogethersportsclub.com</a>
+</footer>
+
+</div>
+<script>
+(function(){
+  var titles={hu:'Gyakori kérdések · GrowTogether SportsClub',en:'FAQ · GrowTogether SportsClub'};
+  var ROLES=['parent','coach'],PLATFORMS=['android','iphone'];
+  var state={lang:'hu',role:null,platform:null};
+  // A hash kotojeles tagokbol all (#en-parent-android); az ismeretlen tag kimarad.
+  function parse(){
+    var s={lang:'hu',role:null,platform:null};
+    location.hash.replace(/^#/,'').split('-').forEach(function(t){
+      if(t==='en'||t==='hu') s.lang=t;
+      else if(ROLES.indexOf(t)>=0) s.role=t;
+      else if(PLATFORMS.indexOf(t)>=0) s.platform=t;
+    });
+    return s;
+  }
+  function canonical(){
+    var parts=[];
+    if(state.lang==='en') parts.push('en');
+    if(state.role) parts.push(state.role);
+    if(state.platform) parts.push(state.platform);
+    // Hash nelkul a teljes cim a #-ig: csak a horgony valtozik, ezt a bongeszo
+    // file:// es beagyazott nezetben is engedi (az utvonalas cimet ott elutasithatja).
+    return parts.length?'#'+parts.join('-'):location.href.split('#')[0];
+  }
+  function apply(){
+    var cls=['js'];
+    if(state.role) cls.push('has-role','role-'+state.role);
+    if(state.platform) cls.push('plat-'+state.platform);
+    document.documentElement.className=cls.join(' ');
+    document.documentElement.setAttribute('lang',state.lang);
+    document.querySelectorAll('[data-lang]').forEach(function(el){el.classList.toggle('on',el.getAttribute('data-lang')===state.lang);});
+    document.querySelectorAll('[data-set]').forEach(function(el){el.classList.toggle('on',el.getAttribute('data-set')===state.lang);});
+    document.querySelectorAll('[data-pick-role]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-pick-role')===state.role));});
+    document.querySelectorAll('[data-pick-platform]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-pick-platform')===state.platform));});
+    document.title=titles[state.lang];
+    // A sajat lapok kozti link viszi a nyelvet (#en), a valasztast nem.
+    document.querySelectorAll('a[href]:not([data-set])').forEach(function(a){
+      var h=a.getAttribute('data-href')||a.getAttribute('href');
+      if(/^(https?:|mailto:|#)/.test(h)) return;
+      a.setAttribute('data-href',h);
+      a.setAttribute('href',state.lang==='en'?h+'#en':h);
+    });
+  }
+  // replaceState: a valasztas nem gyujt vissza-lepeseket.
+  // A nezet akkor is frissul, ha a cim irasa nem sikerul.
+  function update(){try{history.replaceState(null,'',canonical());}catch(e){}apply();}
+  document.querySelectorAll('[data-pick-role]').forEach(function(b){
+    b.addEventListener('click',function(){state.role=b.getAttribute('data-pick-role');update();});
+  });
+  document.querySelectorAll('[data-pick-platform]').forEach(function(b){
+    b.addEventListener('click',function(){state.platform=b.getAttribute('data-pick-platform');update();});
+  });
+  // A nyelvvaltas megtartja a valasztast (a sima #hu / #en link elvesztene).
+  document.querySelectorAll('[data-set]').forEach(function(a){
+    a.addEventListener('click',function(e){e.preventDefault();state.lang=a.getAttribute('data-set');update();});
+  });
+  function fromHash(){state=parse();apply();}
+  window.addEventListener('hashchange',fromHash);
+  fromHash();
+})();
+</script>
+</body>
+</html>
