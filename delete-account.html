@@ -7,41 +7,95 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Fiók és adatok törlése · GrowTogether SportsClub</title>
 <style>
-:root{--ink:#151521;--muted:#5C5B66;--line:#E3E2EA;--paper:#F7F6FC;--white:#FFFFFF;}
+/* A nyitolap arculata (DESIGN.md 2.6): Figtree + Baloo 2 sajat domainrol,
+   papir alap, sotet fejlec es lablec. A SZOVEG VALTOZATLAN. */
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 700;font-display:swap;src:url(assets/fonts/figtree-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 700;font-display:swap;src:url(assets/fonts/figtree-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Baloo 2';font-style:normal;font-weight:600 700;font-display:swap;src:url(assets/fonts/baloo2-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Baloo 2';font-style:normal;font-weight:600 700;font-display:swap;src:url(assets/fonts/baloo2-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+:root{--night:#0F0326;--paper:#FAF7F1;--sun:#EFB349;--lilac:#D2CEE7;--sub:#CFCAE4;--meta:#A9A2C8;--edge:#635B72;--line:#E2DDF0;--white:#FFFFFF;
+      --ink:#4A4366;--ink2:#3E365C;--dim:#B9B3D6;--nav:#E9E6F4;--panel:#1D1134;--blue:#3550D8;--pink:#E50051;--dash:#CFC8E3;--deco:#4D6CFA;--ph:#EDE9F7;
+      --display:'Baloo 2','Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--paper);
-     color:var(--ink);line-height:1.6;font-size:16.5px;}
-.wrap{max-width:760px;margin:0 auto;background:var(--white);min-height:100vh;}
-header{background:var(--ink);color:var(--white);padding:40px 44px 34px;position:relative;}
-.brand{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9C8D2;}
+.sprite{position:absolute;width:0;height:0;overflow:hidden;}
+body{font-family:'Figtree',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--paper);color:var(--night);line-height:1.6;font-size:16.5px;}
+/* A 760-as szovegoszlop kozepre zar; a sotet savok teljes szelessegben futnak. */
+.wrap{display:block;}
+header{background:var(--night);color:var(--white);position:relative;}
+header>div{max-width:1280px;margin:0 auto;padding:72px 22px 34px;}
+.brand{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--lilac);}
 .brand a{color:inherit;text-decoration:none;}
-h1{font-size:clamp(26px,4.4vw,36px);line-height:1.15;margin-top:14px;}
-.sub{margin-top:10px;color:#DCDBE4;max-width:56ch;}
-.lang{position:absolute;top:18px;right:20px;display:flex;border:1px solid rgba(255,255,255,.4);}
-.lang a{color:#DCDBE4;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.12em;padding:7px 12px;}
-.lang a.on{background:var(--white);color:var(--ink);}
-main{padding:12px 44px 40px;}
-h2{font-size:20px;margin:30px 0 10px;}
-h3{font-size:17px;margin:22px 0 6px;}
-p{margin-bottom:12px;}
-ul,ol{margin:0 0 14px 22px;}
-li{margin-bottom:6px;}
-a{color:var(--ink);}
-.cards{list-style:none;margin:24px 0 0;display:grid;gap:12px;}
-.cards a{display:block;border:1px solid var(--line);padding:16px 18px;text-decoration:none;}
-.cards a:hover{border-color:var(--ink);}
-.cards b{display:block;font-size:17px;}
-.cards span{color:var(--muted);font-size:15px;}
-.note{background:var(--paper);border-left:4px solid var(--ink);padding:14px 18px;margin:16px 0;}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(30px,5vw,38px);line-height:1.1;letter-spacing:-.01em;margin-top:14px;}
+.sub{margin-top:12px;color:var(--sub);max-width:56ch;}
+/* A nyelvvalto pirulaja a nyitolapeval azonos; a 44 px a koppinthato linkre all.
+   A fuggoleges helye is a nyitolape: ott a pirula a 72 / 96 px-es fejlecsav
+   kozepen ul (top 10, majd 768-tol 22) - itt ugyanazok a szamok. */
+.lang{position:absolute;top:10px;right:max(22px,calc(50% - 568px));display:flex;border:1px solid rgba(210,206,231,.25);border-radius:999px;padding:3px;}
+.lang a{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;color:var(--lilac);text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.08em;border-radius:999px;padding:0 10px;}
+.lang a.on{background:var(--lilac);color:var(--night);}
+main>div{max-width:1280px;margin:0 auto;padding:8px 22px 48px;}
+/* A szovegoszlop olvashato merteke a fooldali tartalomdobozon BELUL, balra zarva.
+   A tartalmi elemek szabalyai `main`-re szukitve: a csupasz `ul,ol` 22 px-es
+   behuzasa a lablec linksorat is beljebb tolta a logohoz kepest. */
+main p,main ul,main ol,main h2,main h3,.sub,.note{max-width:760px;}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(24px,3.6vw,30px);line-height:1.15;letter-spacing:-.01em;margin:38px 0 12px;}
+h3{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.2;margin:26px 0 6px;}
+main p{margin-bottom:12px;color:var(--ink);}
+main ul,main ol{margin:0 0 14px 22px;color:var(--ink);}
+main li{margin-bottom:6px;}
+a{color:var(--blue);}
+a:hover{text-decoration:none;}
+main b{color:var(--night);}
+/* Kiemelt doboz: a nyitolap kartyaja, sarga csikkal (mint a funkciokartyak mobilon). */
+.note{position:relative;background:var(--white);border-radius:20px;box-shadow:0 1px 0 rgba(15,3,38,.04);padding:18px 20px 18px 42px;margin:18px 0;}
+/* A sarga csik abszolut, nem flex-elem: igy a doboz tobb bekezdest is elbir. */
+.note::before{content:"";position:absolute;left:20px;top:18px;bottom:18px;width:8px;border-radius:999px;background:var(--sun);}
 .note p:last-child{margin-bottom:0;}
-footer{border-top:1px solid var(--line);padding:22px 44px 30px;font-size:14px;color:var(--muted);}
-footer a{color:var(--muted);margin-right:14px;}
+.cards{list-style:none;margin:24px 0 0;display:grid;gap:14px;}
+.cards a{display:block;background:var(--white);border-radius:20px;box-shadow:0 1px 0 rgba(15,3,38,.04);padding:18px 20px;text-decoration:none;color:var(--night);}
+.cards b{display:block;font-family:var(--display);font-weight:600;font-size:19px;line-height:1.2;}
+.cards span{color:var(--ink);font-size:15px;}
+/* Lablec (vaszon): sotet alap, balra a logo es a cegsor, jobbra a lapok.
+   Mobilon egymas alatt, asztalin egy sorban. A vaszon "GrowTogether
+   SportsLab"-ot ir - a lapon a termek neve all (`GrowTogether SportsClub`),
+   mert a "SportsLab" egyetlen nyilvanos lapon sem szerepel, az adatkezelot
+   pedig a tajekoztato nevezi meg. */
+footer{background:var(--night);border-top:1px solid rgba(210,206,231,.14);}
+.foot{max-width:1280px;margin:0 auto;padding:32px 22px;display:flex;flex-direction:column;gap:16px;}
+.foot-id{display:flex;flex-direction:column;gap:16px;}
+.foot-home{display:block;align-self:flex-start;}
+.foot-logo{display:block;width:112px;height:auto;}
+.foot-org{font-size:13px;line-height:1.6;color:#8F88B0;}
+.foot-org a{color:var(--dim);text-decoration:none;}
+.foot-org a:hover{text-decoration:underline;}
+.foot-links{list-style:none;display:flex;flex-wrap:wrap;gap:6px 24px;}
+.foot-links a{display:inline-block;padding:6px 0;font-size:15px;font-weight:600;color:var(--dim);text-decoration:none;}
+.foot-links a:hover{text-decoration:underline;}
 /* Script nelkul mindket nyelv latszik; a script csak az egyiket mutatja. */
 .js [data-lang]:not(.on){display:none;}
-@media (max-width:640px){header{padding:52px 16px 26px;}main{padding:8px 16px 32px;}footer{padding:20px 16px 26px;}.lang{top:12px;right:12px;}}
+@media (min-width:640px){
+  header>div{padding:56px 40px 44px;}
+  main>div{padding:8px 40px 64px;}
+  .foot{padding:40px 40px;}
+  .lang{right:max(40px,calc(50% - 568px));}
+}
+@media (min-width:768px){
+  .lang{top:22px;}
+}
+@media (min-width:1200px){
+  header>div{padding:72px 72px 56px;}
+  main>div{padding:8px 72px 80px;}
+  .lang{right:max(72px,calc(50% - 568px));}
+  .foot{padding:48px 72px;flex-direction:row;justify-content:space-between;align-items:center;}
+  .foot-id{flex-direction:row;align-items:center;gap:28px;}
+  .foot-logo{width:132px;}
+  .foot-org{font-size:14px;line-height:1.5;}
+  .foot-links{gap:28px;}
+}
 </style>
 </head>
 <body>
+<svg class="sprite" aria-hidden="true"><symbol id="gtlogo" viewBox="0 0 444.596 156.741"><g> <g> <g> <path d="M53.375,58.641c-1.38-19.61-7.16-38.7-16.93-55.69l4.47-2.57c1.37-.79,3.13-.31,3.89,1.07,10.35,18.92,16.13,40.15,16.84,61.81l-8.27-4.62Z" fill="#e50051"></path> <path d="M43.995,117.181l9.94-3.62c-5.4,15.43-13.51,29.9-24.06,42.62l-4.02-3.33c-1.19-.99-1.35-2.75-.39-3.97,7.68-9.68,13.9-20.37,18.53-31.7Z" fill="#e50051"></path> <path d="M59.935,89.951c-1.01,6.23-2.44,12.36-4.28,18.37l-9.03,1.85c1.92-5.57,3.45-11.27,4.6-17.06l8.71-3.16Z" fill="#e50051"></path> <path d="M61.715,69.261c-.05,4.9-.36,9.77-.94,14.61-.76-.72-1.77-1.38-1.8.11l-6.67,2.84c.93-6.26,1.4-12.61,1.4-18.99,0-.77-.01-1.54-.02-2.31l8.03,3.74Z" fill="#e50051"></path> </g> <g> <path d="M2.375,97.831l100.15-36.45c-.3,3.02-.71,6.01-1.22,8.98L2.455,106.341l-1.78-4.87c-.53-1.48.23-3.1,1.7-3.64Z" fill="#d2cee7"></path> <path d="M136.915,57.401l-29.27,10.65c.69-3.18,1.56-7.03,1.82-9.2l27.37-9.96,1.77,4.87c.54,1.47-.22,3.1-1.69,3.64Z" fill="#d2cee7"></path> </g> <path d="M-.416,47.99h91.533v5.733c0,1.261-1.024,2.285-2.285,2.285H-2.701v-5.733c0-1.261,1.024-2.285,2.285-2.285Z" transform="translate(26.118 -13.811) rotate(25)" fill="#d2cee7"></path> <g> <path d="M9.265,116.761l88.76-32.3c-.96,3.29-2.05,6.53-3.29,9.73L9.345,125.271l-1.77-4.87c-.54-1.47.22-3.1,1.69-3.64Z" fill="#f0b149"></path> <path d="M143.805,76.331l-42.41,15.43c1.4-3.01,3.89-6.8,4.64-9.6.05-.21.08-.42.09-.65l37.6-13.69,1.77,4.87c.54,1.48-.22,3.1-1.69,3.64Z" fill="#f0b149"></path> </g> <path d="M63.762,156.741l-3.272-4.061c-.975-1.209-.783-2.965.406-3.965,29.577-24.876,46.481-61.098,46.481-99.826,0-16.012-2.872-31.661-8.536-46.511l4.813-1.836c1.475-.563,3.141.182,3.673,1.668,5.355,14.961,8.069,30.65,8.069,46.679,0,42.101-18.82,81.412-51.634,107.852Z" fill="#4d6cfa"></path> </g> <g> <g> <path d="M208.876,49.224v16.017c0,1.209-.266,2.167-.794,2.871-.528.706-1.372,1.36-2.53,1.964-1.311.706-3.188,1.311-5.629,1.813-2.443.503-4.899.755-7.367.755-4.785,0-9.055-.844-12.806-2.531-3.753-1.687-6.712-4.306-8.878-7.857-2.166-3.551-3.248-8.096-3.248-13.637,0-5.338,1.107-9.796,3.324-13.373,2.215-3.576,5.175-6.271,8.877-8.084,3.702-1.813,7.794-2.72,12.277-2.72,3.022,0,5.654.328,7.896.982,2.241.655,3.979,1.511,5.214,2.569,1.232,1.058,1.85,2.217,1.85,3.476,0,.957-.264,1.813-.793,2.569-.528.755-1.121,1.335-1.775,1.737-1.359-.855-2.973-1.649-4.835-2.38-1.864-.729-4.155-1.095-6.876-1.095-2.922,0-5.553.63-7.895,1.889-2.342,1.26-4.168,3.111-5.479,5.553-1.31,2.444-1.964,5.402-1.964,8.877,0,3.728.654,6.788,1.964,9.18,1.311,2.393,3.123,4.168,5.44,5.327,2.316,1.159,4.936,1.738,7.857,1.738,1.46,0,2.808-.125,4.042-.378,1.234-.251,2.203-.554,2.909-.907v-10.729h-9.822c-.202-.352-.415-.869-.642-1.549s-.34-1.372-.34-2.078c0-1.36.302-2.354.906-2.984.604-.629,1.436-.944,2.493-.944h12.692c1.158,0,2.104.353,2.834,1.058.729.706,1.096,1.662,1.096,2.871Z" fill="#d2cee7"></path> <path d="M224.589,44.313v10.351h-9.293v-11.106c0-1.258.303-2.329.906-3.211.605-.881,1.461-1.7,2.569-2.456,1.511-.907,3.425-1.662,5.741-2.267s4.811-.907,7.48-.907c4.734,0,7.102,1.461,7.102,4.382,0,.706-.102,1.348-.302,1.926-.202.58-.454,1.096-.756,1.549-.504-.1-1.134-.188-1.889-.264s-1.562-.113-2.417-.113c-1.814,0-3.514.189-5.101.566-1.587.378-2.935.895-4.042,1.549ZM215.296,51.566l9.293.453v19.342c-.404.151-.982.289-1.738.416-.755.125-1.586.188-2.492.188-1.713,0-2.984-.315-3.816-.944-.83-.629-1.246-1.75-1.246-3.362v-16.093Z" fill="#d2cee7"></path> <path d="M276.192,53.605c0,3.879-.756,7.242-2.268,10.086-1.511,2.846-3.639,5.037-6.384,6.573-2.746,1.536-5.981,2.304-9.708,2.304s-6.978-.769-9.747-2.304c-2.771-1.536-4.924-3.714-6.46-6.535-1.537-2.82-2.305-6.196-2.305-10.125,0-3.878.781-7.227,2.343-10.048,1.561-2.82,3.728-4.999,6.497-6.535,2.77-1.536,5.994-2.305,9.672-2.305s6.887.782,9.633,2.342c2.744,1.562,4.885,3.753,6.422,6.573,1.535,2.821,2.305,6.146,2.305,9.973ZM257.757,42.122c-2.72,0-4.873,1.008-6.46,3.022-1.587,2.015-2.38,4.835-2.38,8.462,0,3.728.78,6.586,2.342,8.576,1.561,1.99,3.752,2.984,6.574,2.984,2.77,0,4.936-1.007,6.497-3.022,1.561-2.014,2.343-4.86,2.343-8.538,0-3.576-.782-6.384-2.343-8.424-1.562-2.04-3.753-3.06-6.573-3.06Z" fill="#d2cee7"></path> <path d="M304.675,48.09c-.654,2.771-1.436,5.579-2.342,8.424-.906,2.846-1.764,5.515-2.568,8.008-.807,2.493-1.512,4.546-2.115,6.158-.505.453-1.185.806-2.041,1.058s-1.914.378-3.173.378c-1.36,0-2.581-.215-3.664-.642-1.084-.428-1.827-1.045-2.229-1.851-.453-1.007-.981-2.456-1.586-4.344-.604-1.889-1.223-4.042-1.852-6.46-.63-2.418-1.26-4.936-1.889-7.555-.631-2.619-1.209-5.163-1.737-7.631-.529-2.467-.971-4.659-1.322-6.573.554-.554,1.247-1.032,2.077-1.436.832-.402,1.775-.604,2.834-.604,1.359,0,2.442.328,3.248.982.806.655,1.31,1.737,1.512,3.249.502,2.922.982,5.68,1.436,8.273.453,2.595.906,4.949,1.359,7.064.453,2.115.844,3.917,1.172,5.402.326,1.486.566,2.607.717,3.362h.303c.352-1.158.881-2.996,1.586-5.516.705-2.518,1.549-5.402,2.531-8.651.982-3.249,1.951-6.56,2.909-9.935.704-.352,1.447-.642,2.229-.869.779-.227,1.674-.34,2.682-.34,1.309,0,2.418.215,3.324.643.906.428,1.512,1.095,1.812,2.002,1.008,3.224,1.952,6.359,2.834,9.406.881,3.048,1.662,5.742,2.342,8.084.68,2.342,1.172,4.093,1.474,5.251h.378c.855-4.18,1.762-8.613,2.72-13.297.956-4.685,1.763-9.343,2.417-13.978,1.26-.755,2.645-1.133,4.156-1.133,1.309,0,2.367.291,3.174.869.805.58,1.208,1.524,1.208,2.833,0,.706-.14,1.839-.415,3.4-.277,1.562-.656,3.375-1.134,5.44-.479,2.066-1.021,4.257-1.624,6.573-.604,2.317-1.223,4.56-1.852,6.725-.631,2.166-1.222,4.105-1.775,5.817-.555,1.713-1.033,3.048-1.436,4.004-.453.404-1.184.744-2.191,1.02s-2.115.416-3.324.416c-3.123,0-4.937-.755-5.439-2.267-.604-1.511-1.297-3.45-2.078-5.818-.781-2.367-1.562-4.936-2.342-7.706-.781-2.77-1.549-5.516-2.305-8.235Z" fill="#d2cee7"></path> </g> <g> <path d="M187.947,81.333l.151,7.782h-21.23c-.253-.403-.479-.932-.68-1.587-.202-.654-.303-1.385-.303-2.191,0-1.36.303-2.367.906-3.022.605-.654,1.436-.982,2.494-.982h18.661ZM179.712,87.075h9.52v39.968c-.403.151-1.02.289-1.851.416-.831.125-1.675.188-2.531.188-1.864,0-3.187-.34-3.966-1.02-.782-.68-1.172-1.825-1.172-3.438v-36.114ZM181.224,89.115l-.227-7.782h21.23c.251.353.478.869.68,1.549.2.68.302,1.398.302,2.153,0,1.311-.302,2.317-.907,3.022-.604.706-1.436,1.058-2.492,1.058h-18.586Z" fill="#d2cee7"></path> <path d="M237.058,109.288c0,3.879-.756,7.242-2.268,10.086-1.511,2.846-3.639,5.037-6.384,6.573-2.746,1.536-5.981,2.304-9.708,2.304s-6.978-.769-9.747-2.304c-2.771-1.536-4.924-3.714-6.46-6.535-1.537-2.82-2.305-6.196-2.305-10.125,0-3.878.781-7.227,2.343-10.048,1.561-2.82,3.728-4.999,6.497-6.535,2.77-1.536,5.994-2.305,9.672-2.305s6.887.782,9.633,2.342c2.744,1.562,4.885,3.753,6.422,6.573,1.535,2.821,2.305,6.146,2.305,9.973ZM218.622,97.804c-2.72,0-4.873,1.008-6.46,3.022-1.587,2.015-2.38,4.835-2.38,8.462,0,3.728.78,6.586,2.342,8.576,1.561,1.99,3.752,2.984,6.574,2.984,2.77,0,4.936-1.007,6.497-3.022,1.561-2.014,2.343-4.86,2.343-8.538,0-3.576-.782-6.384-2.343-8.424-1.562-2.04-3.753-3.06-6.573-3.06Z" fill="#d2cee7"></path> <path d="M256.775,125.91c-2.973,0-5.718-.567-8.235-1.7-2.52-1.133-4.533-3.009-6.045-5.629-1.511-2.618-2.266-6.069-2.266-10.351,0-3.929.768-7.215,2.304-9.86,1.536-2.644,3.702-4.633,6.497-5.968,2.797-1.334,6.008-2.002,9.634-2.002,2.569,0,4.948.328,7.14.982,2.191.655,3.94,1.411,5.251,2.267.856.555,1.549,1.222,2.077,2.002.529.782.794,1.726.794,2.833v23.572h-9.066v-22.741c-.655-.403-1.462-.756-2.418-1.058-.957-.302-2.142-.453-3.551-.453-2.771,0-5.024.857-6.763,2.569-1.736,1.713-2.605,4.333-2.605,7.857,0,3.879.842,6.599,2.531,8.16,1.687,1.562,3.764,2.342,6.232,2.342,1.914,0,3.463-.327,4.646-.982,1.184-.654,2.178-1.36,2.984-2.115l.303,7.555c-.907.706-2.154,1.335-3.74,1.889-1.587.555-3.488.832-5.704.832ZM265.011,127.42v-7.404h8.915v7.707c0,3.425-.782,6.207-2.343,8.349-1.561,2.14-3.689,3.714-6.384,4.722-2.694,1.007-5.704,1.511-9.028,1.511-2.619,0-4.899-.253-6.838-.756-1.939-.504-3.361-1.033-4.269-1.586-1.662-1.008-2.493-2.393-2.493-4.155,0-.907.201-1.713.604-2.418.402-.706.88-1.235,1.436-1.586,1.259.805,2.833,1.511,4.722,2.115s3.891.907,6.007.907c3.022,0,5.389-.593,7.102-1.775,1.712-1.184,2.569-3.06,2.569-5.629Z" fill="#d2cee7"></path> <path d="M284.577,114.048l-.377-6.498,20.248-3.022c-.15-1.914-.882-3.576-2.191-4.986-1.311-1.41-3.224-2.116-5.742-2.116-2.568,0-4.709.895-6.422,2.682-1.713,1.789-2.594,4.344-2.645,7.669l.228,3.929c.453,3.224,1.7,5.591,3.739,7.102,2.041,1.511,4.621,2.267,7.744,2.267,2.115,0,4.08-.314,5.894-.945,1.813-.629,3.249-1.322,4.307-2.078.704.454,1.271,1.02,1.7,1.7.427.68.643,1.424.643,2.229,0,1.311-.58,2.431-1.738,3.362-1.16.933-2.721,1.65-4.685,2.153s-4.206.755-6.724.755c-3.88,0-7.317-.718-10.313-2.153-2.997-1.436-5.339-3.588-7.026-6.459s-2.531-6.447-2.531-10.729c0-3.072.479-5.767,1.436-8.084.957-2.316,2.254-4.243,3.891-5.78,1.637-1.536,3.539-2.694,5.705-3.475,2.164-.781,4.432-1.171,6.799-1.171,3.324,0,6.234.668,8.727,2.002,2.494,1.335,4.458,3.186,5.894,5.553,1.436,2.368,2.153,5.088,2.153,8.16,0,1.411-.366,2.455-1.096,3.135-.73.68-1.75,1.096-3.06,1.247l-24.556,3.551Z" fill="#d2cee7"></path> <path d="M327.114,109.288h-9.293v-27.199c.402-.151.993-.302,1.775-.454.779-.151,1.598-.227,2.455-.227,1.762,0,3.047.315,3.854.944.805.63,1.209,1.751,1.209,3.362v23.572ZM317.821,107.248h9.293v8.915c0,1.662.49,2.846,1.473,3.551.982.706,2.38,1.058,4.193,1.058.805,0,1.674-.101,2.606-.302.932-.201,1.725-.454,2.38-.756.352.404.68.882.982,1.436.303.555.453,1.235.453,2.04,0,1.461-.693,2.67-2.078,3.626-1.386.957-3.539,1.436-6.459,1.436-3.98,0-7.115-.895-9.406-2.682-2.293-1.787-3.438-4.696-3.438-8.726v-9.595ZM323.487,99.542v-7.329h14.809c.2.353.415.857.642,1.511.228.655.341,1.335.341,2.04,0,1.26-.303,2.204-.907,2.833-.604.63-1.386.944-2.343.944h-12.541Z" fill="#d2cee7"></path> <path d="M353.178,112.008h-9.293v-33.923c.403-.101.982-.227,1.737-.378.756-.151,1.588-.227,2.494-.227,1.762,0,3.047.315,3.854.944.805.63,1.208,1.75,1.208,3.362v30.221ZM343.885,107.248h9.293v19.795c-.403.151-.981.289-1.737.416-.756.125-1.587.188-2.494.188-1.713,0-2.983-.315-3.814-.944-.832-.629-1.247-1.75-1.247-3.362v-16.093ZM376.901,111.932h-9.293v-6.8c0-2.569-.693-4.432-2.078-5.591-1.385-1.158-3.135-1.738-5.25-1.738-1.713,0-3.287.328-4.723.982-1.436.655-2.682,1.411-3.74,2.267l-.528-7.555c1.158-.705,2.645-1.397,4.458-2.078,1.812-.68,3.854-1.02,6.119-1.02,4.533,0,8.172,1.184,10.918,3.551,2.744,2.368,4.117,5.944,4.117,10.729v7.253ZM367.608,107.323h9.293v19.72c-.403.151-.995.289-1.775.416-.781.125-1.6.188-2.455.188-1.764,0-3.049-.315-3.854-.944-.807-.629-1.209-1.75-1.209-3.362v-16.018Z" fill="#d2cee7"></path> <path d="M387.629,114.048l-.378-6.498,20.248-3.022c-.15-1.914-.881-3.576-2.19-4.986-1.311-1.41-3.224-2.116-5.742-2.116-2.569,0-4.71.895-6.422,2.682-1.713,1.789-2.595,4.344-2.645,7.669l.228,3.929c.453,3.224,1.699,5.591,3.739,7.102,2.04,1.511,4.62,2.267,7.744,2.267,2.115,0,4.079-.314,5.894-.945,1.812-.629,3.248-1.322,4.307-2.078.704.454,1.271,1.02,1.699,1.7.428.68.643,1.424.643,2.229,0,1.311-.58,2.431-1.738,3.362-1.159.933-2.72,1.65-4.684,2.153-1.965.503-4.207.755-6.725.755-3.879,0-7.316-.718-10.312-2.153-2.998-1.436-5.34-3.588-7.027-6.459s-2.531-6.447-2.531-10.729c0-3.072.479-5.767,1.436-8.084.957-2.316,2.254-4.243,3.892-5.78,1.636-1.536,3.538-2.694,5.704-3.475,2.165-.781,4.432-1.171,6.8-1.171,3.324,0,6.233.668,8.727,2.002,2.493,1.335,4.458,3.186,5.894,5.553,1.436,2.368,2.152,5.088,2.152,8.16,0,1.411-.365,2.455-1.096,3.135s-1.75,1.096-3.059,1.247l-24.556,3.551Z" fill="#d2cee7"></path> <path d="M430.089,99.995v10.351h-9.293v-11.106c0-1.258.303-2.329.907-3.211.604-.881,1.46-1.7,2.569-2.456,1.51-.907,3.424-1.662,5.741-2.267,2.316-.604,4.81-.907,7.479-.907,4.734,0,7.103,1.461,7.103,4.382,0,.706-.102,1.348-.302,1.926-.203.58-.454,1.096-.756,1.549-.504-.1-1.134-.188-1.889-.264-.756-.076-1.562-.113-2.418-.113-1.813,0-3.514.189-5.1.566-1.587.378-2.936.895-4.043,1.549ZM420.796,107.248l9.293.453v19.342c-.403.151-.982.289-1.737.416-.755.125-1.587.188-2.493.188-1.713,0-2.984-.315-3.815-.944-.831-.629-1.247-1.75-1.247-3.362v-16.093Z" fill="#d2cee7"></path> </g> </g> </g></symbol></svg>
 <div class="wrap">
 
 <header>
@@ -137,8 +191,20 @@ footer a{color:var(--muted);margin-right:14px;}
 </main>
 
 <footer>
-  <a href="./">GrowTogether SportsClub</a><a href="privacy">Privacy</a><a href="support">Support</a><a href="delete-account">Delete account</a><a href="faq">FAQ</a>
-  · <a href="mailto:hello@growtogethersportsclub.com">hello@growtogethersportsclub.com</a>
+  <div data-lang="hu" class="foot">
+    <div class="foot-id">
+      <a class="foot-home" href="./" aria-label="GrowTogether SportsClub"><svg class="foot-logo" viewBox="0 0 444.596 156.741" role="img" aria-hidden="true"><use href="#gtlogo"></use></svg></a>
+      <p class="foot-org">GrowTogether SportsClub · Budapest<br><a href="mailto:hello@growtogethersportsclub.com">hello@growtogethersportsclub.com</a></p>
+    </div>
+    <ul class="foot-links"><li><a href="privacy">Adatkezelési tájékoztató</a></li><li><a href="support">Támogatás</a></li><li><a href="delete-account">Fiók és adatok törlése</a></li><li><a href="faq">Gyakori kérdések</a></li></ul>
+  </div>
+  <div data-lang="en" class="foot" lang="en">
+    <div class="foot-id">
+      <a class="foot-home" href="./" aria-label="GrowTogether SportsClub"><svg class="foot-logo" viewBox="0 0 444.596 156.741" role="img" aria-hidden="true"><use href="#gtlogo"></use></svg></a>
+      <p class="foot-org">GrowTogether SportsClub · Budapest<br><a href="mailto:hello@growtogethersportsclub.com">hello@growtogethersportsclub.com</a></p>
+    </div>
+    <ul class="foot-links"><li><a href="privacy">Privacy notice</a></li><li><a href="support">Support</a></li><li><a href="delete-account">Delete your account and data</a></li><li><a href="faq">FAQ</a></li></ul>
+  </div>
 </footer>
 
 </div>

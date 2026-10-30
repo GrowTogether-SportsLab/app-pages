@@ -2,97 +2,423 @@
 <html lang="hu">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-hQtAnUyxXciQt7Wczd55Jx/0O8101nL2ENirzQvPbhg='; style-src 'sha256-tnjVjMLQmG+ib74KnC+AkuLLQ6u2T/sCT8T3Ub7pqZ4='; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Egyelore ne talaljak meg a keresok (2026-10-15). Forras: GrowTogether-SportsClub docs/site/ (README). -->
 <meta name="robots" content="noindex, nofollow">
 <title>GrowTogether SportsClub</title>
 <style>
-:root{--ink:#151521;--muted:#5C5B66;--line:#E3E2EA;--paper:#F7F6FC;--white:#FFFFFF;}
+/* Nyitolap v2 (DESIGN.md 2.6). A CSP a stilus hash-et koveteli: ez az egyetlen stilusblokk, es inline stilusattributum nincs (SPEC 7.6). */
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 700;font-display:swap;src:url(assets/fonts/figtree-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 700;font-display:swap;src:url(assets/fonts/figtree-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Baloo 2';font-style:normal;font-weight:600 700;font-display:swap;src:url(assets/fonts/baloo2-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Baloo 2';font-style:normal;font-weight:600 700;font-display:swap;src:url(assets/fonts/baloo2-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+:root{--night:#0F0326;--paper:#FAF7F1;--sun:#EFB349;--lilac:#D2CEE7;--sub:#CFCAE4;--meta:#A9A2C8;--edge:#635B72;--line:#E2DDF0;--white:#FFFFFF;
+      --ink:#4A4366;--ink2:#3E365C;--dim:#B9B3D6;--nav:#E9E6F4;--panel:#1D1134;--blue:#3550D8;--pink:#E50051;--dash:#CFC8E3;--deco:#4D6CFA;--ph:#EDE9F7;
+      --display:'Baloo 2','Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--paper);
-     color:var(--ink);line-height:1.6;font-size:16.5px;}
-.wrap{max-width:760px;margin:0 auto;background:var(--white);min-height:100vh;}
-header{background:var(--ink);color:var(--white);padding:40px 44px 34px;position:relative;}
-.brand{font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C9C8D2;}
-.brand a{color:inherit;text-decoration:none;}
-h1{font-size:clamp(26px,4.4vw,36px);line-height:1.15;margin-top:14px;}
-.sub{margin-top:10px;color:#DCDBE4;max-width:56ch;}
-.lang{position:absolute;top:18px;right:20px;display:flex;border:1px solid rgba(255,255,255,.4);}
-.lang a{color:#DCDBE4;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.12em;padding:7px 12px;}
-.lang a.on{background:var(--white);color:var(--ink);}
-main{padding:12px 44px 40px;}
-h2{font-size:20px;margin:30px 0 10px;}
-h3{font-size:17px;margin:22px 0 6px;}
-p{margin-bottom:12px;}
-ul,ol{margin:0 0 14px 22px;}
-li{margin-bottom:6px;}
-a{color:var(--ink);}
-.cards{list-style:none;margin:24px 0 0;display:grid;gap:12px;}
-.cards a{display:block;border:1px solid var(--line);padding:16px 18px;text-decoration:none;}
-.cards a:hover{border-color:var(--ink);}
-.cards b{display:block;font-size:17px;}
-.cards span{color:var(--muted);font-size:15px;}
-.note{background:var(--paper);border-left:4px solid var(--ink);padding:14px 18px;margin:16px 0;}
-.note p:last-child{margin-bottom:0;}
-footer{border-top:1px solid var(--line);padding:22px 44px 30px;font-size:14px;color:var(--muted);}
-footer a{color:var(--muted);margin-right:14px;}
-/* Script nelkul mindket nyelv latszik; a script csak az egyiket mutatja. */
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+body{font-family:'Figtree',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;background:var(--paper);color:var(--night);line-height:1.5;}
+a{color:var(--night);}
+.sprite{position:absolute;width:0;height:0;overflow:hidden;}
+:focus-visible{outline:2px solid var(--sun);outline-offset:2px;}
+.hero{background:var(--night);color:var(--white);overflow:hidden;}
+.hero-in{position:relative;max-width:1280px;margin:0 auto;}
+.top{position:relative;z-index:6;height:72px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.logo{display:block;}
+.logo svg{display:block;width:112px;height:auto;}
+.top-r{display:flex;align-items:center;gap:20px;}
+.mainnav{display:none;gap:32px;align-items:center;}
+.mainnav a{color:var(--nav);text-decoration:none;font-weight:600;font-size:15px;}
+.mainnav a:hover{text-decoration:underline;}
+.lang{display:flex;border:1px solid rgba(210,206,231,.25);border-radius:999px;padding:3px;}
+.lang a{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;color:var(--lilac);text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.08em;border-radius:999px;padding:0 10px;}
+.lang a.on{background:var(--lilac);color:var(--night);}
+.top-cta{display:none;}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font-weight:700;font-size:17px;transition:box-shadow .18s ease;}
+.btn-sun{background:var(--sun);color:var(--night);}
+.btn-ghost{color:var(--white);border:1px solid var(--edge);}
+.top-cta .btn{height:44px;padding:0 20px;border-radius:8px;}
+@media (hover:hover){.btn-sun:hover{box-shadow:inset 0 0 0 999px rgba(15,3,38,.08);}.btn-ghost:hover{box-shadow:inset 0 0 0 999px rgba(255,255,255,.1);}}
+/* Hasabmenu: szkript nelkul a gomb nem latszik (halott gomb helyett semmi), a panel sem. */
+.burger{display:none;width:44px;height:44px;padding:0;border:0;border-radius:14px;background:rgba(210,206,231,.14);cursor:pointer;font-family:inherit;align-items:center;justify-content:center;flex-direction:column;gap:5px;}
+.js .burger{display:flex;}
+.burger span{display:block;width:20px;height:2.5px;border-radius:2px;background:var(--white);}
+.burger span:last-child{width:14px;background:var(--sun);}
+.burger.on span:last-child{width:20px;background:var(--white);}
+.menu{position:absolute;left:10px;right:10px;top:72px;z-index:5;padding:4px 12px 12px;background:var(--panel);border:1px solid rgba(210,206,231,.18);border-radius:20px;box-shadow:0 24px 48px rgba(0,0,0,.5);flex-direction:column;display:none;}
+.menu.on{display:flex;}
+.menu a{display:flex;align-items:center;height:54px;padding-left:10px;text-decoration:none;color:var(--white);font-weight:600;font-size:18px;border-bottom:1px solid rgba(210,206,231,.14);}
+.menu a:last-child{border-bottom:0;}
+.menu .btn{margin-top:12px;padding:17px 0;border-radius:12px;justify-content:center;}
+/* A `.menu a` fehér felirata erosebb, mint a `.btn-sun` sotetje: visszaallitjuk. */
+.menu .btn-sun{color:var(--night);}
+.intro{position:relative;z-index:1;padding:28px 22px 0;display:flex;flex-direction:column;gap:18px;}
+.pill{display:inline-flex;align-self:flex-start;align-items:center;gap:7px;background:rgba(210,206,231,.12);border:1px solid rgba(210,206,231,.25);color:var(--lilac);font-weight:600;font-size:11px;padding:7px 10px;border-radius:999px;letter-spacing:.04em;}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--sun);flex-shrink:0;}
+h1{font-family:var(--display);font-weight:600;font-size:44px;line-height:1;letter-spacing:-.02em;}
+h1 em{font-style:normal;color:var(--sun);}
+h2{font-family:var(--display);font-weight:600;font-size:30px;line-height:1.06;letter-spacing:-.01em;}
+h3{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.2;}
+/* A szeles elrendezesben (telefon a szoveg mellett) az angol elso mondat
+   ott torik, ahol a magyar ugyanaz a sor ervegez - kulonben jobbra sokkal
+   tovabb fut. Keskenyebb nezetben a sor magatol tordel. */
+.lead br.wide{display:none;}
+.lead{font-size:17px;line-height:1.5;color:var(--sub);}
+.lead br{display:none;}
+.ctas{display:flex;flex-direction:column;gap:12px;margin-top:6px;}
+.ctas .btn{border-radius:12px;padding:16px 26px;}
+.ctas .btn-sun{padding:17px 26px;}
+.meta{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;font-size:13px;color:var(--meta);}
+.art{position:relative;max-width:480px;margin:4px auto 0;aspect-ratio:390/550;}
+.art svg{position:absolute;left:0;top:0;pointer-events:none;overflow:visible;}
+.deco-m{width:100%;height:100%;}
+.deco-d{display:none;}
+.art img{position:absolute;left:3.85%;top:13.64%;width:92.31%;height:auto;}
+/* Szekciok. A 1280-as korlat a KULSO dobozra megy, a 72/40/22-es oldalmargo
+   azon belul - ugyanugy, mint a hos blokknal (`.hero-in` + `.intro`). Ha a
+   korlat a belso dobozra menne, szeles nezetben a szekciok tartalma 72 px-rel
+   elcsuszna a hos blokketol, es a tartalomdoboz 1136 helyett 1280 lenne. */
+.sec-in{max-width:1280px;margin:0 auto;padding:56px 22px;}
+.sec-head{display:flex;flex-direction:column;gap:14px;}
+.sec-lead{font-size:16px;line-height:1.55;color:var(--ink);}
+/* A terv szerinti also terkozok: ahol a vaszon 0-t ad, a kovetkezo szekcio
+   felso paddingje adja a tavolsagot (nem adodik ossze a kettő). */
+.why .sec-in{padding-bottom:0;}
+.dark{background:var(--night);color:var(--white);}
+.dark .sec-lead{color:var(--sub);}
+.white{background:var(--white);}
+/* Funkciokartyak */
+.cards{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:22px;}
+.card{background:var(--white);border-radius:20px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 1px 0 rgba(15,3,38,.04);}
+/* A kartya rudja. A szin a KARTYAN all (`color`), a ket valtozat onnan veszi:
+   mobilon a fuggoleges, lekerekitett `<span>` (background), asztalin a vaszon
+   kitoltott ferde alakzata (`fill`). A szin-osztaly NEM allit hatteret - kulonben
+   az SVG dobozat is kiszinezne (ez volt a tomor teglalap). A kartya szovege sajat
+   szint kap, hogy ne orokolje a rudet. */
+.tick{width:8px;align-self:stretch;border-radius:999px;flex-shrink:0;background:currentColor;}
+.tick-d{display:none;}
+.tick-blue{color:var(--deco);}
+.tick-pink{color:var(--pink);}
+.tick-sun{color:var(--sun);}
+.tick-night{color:var(--night);}
+.card h3{color:var(--night);}
+.card h3{overflow-wrap:break-word;}
+.card p{font-size:15px;line-height:1.5;color:var(--ink);margin-top:4px;}
+/* Mit ad a GrowTogether */
+.roles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:24px;}
+.rbtn{font-family:inherit;font-weight:700;font-size:15px;line-height:1;height:44px;padding:0 12px;border-radius:6px;cursor:pointer;background:var(--white);color:var(--night);border:1px solid var(--line);transition:box-shadow .18s ease;}
+.rbtn.on{color:var(--white);border-color:transparent;}
+.rbtn[data-role="athlete"].on{background:var(--pink);}
+.rbtn[data-role="parent"].on{background:var(--sun);color:var(--night);}
+.rbtn[data-role="coach"].on{background:var(--night);}
+.rbtn[data-role="club"].on{background:var(--blue);}
+@media (hover:hover){.rbtn:hover{box-shadow:inset 0 0 0 999px rgba(15,3,38,.04);}}
+.who{position:relative;background:var(--white);overflow:hidden;}
+.rbody{margin-top:26px;}
+.js .rbody:not(.on){display:none;}
+/* A rajzreteg: mobilon a szoveg alatt egy 390x312-es, levagott sav; asztalin a
+   szekcio jobb oldalan, abszolut helyen (a vaszon szerint). A diszvonal SVG-je
+   MINDKET nezetben ugyanaz, asztali koordinatakban (1280x558) - mobilon a
+   `transform` viszi at a vaszon 0.56-os kivagasaba. */
+.who .sec-in{padding-bottom:0;}
+.rart{position:relative;display:block;height:312px;overflow:hidden;margin:10px -22px 0;}
+.rart-in{position:relative;display:block;height:100%;max-width:390px;margin:0 auto;}
+/* MIND A NEGY KABALA EGYFORMA MERETU es egy fuggolegesen allo tengelyen.
+   A vaszon szerepenkent mas magassagot adott (604-659) - de az a REGI kepek
+   eltero kivagasat egyenlitette ki. Az uj negy kep egysegesen keretezett
+   (tartalom 918-959 x 1452-1514, keparany ~0,63), ezert ott az eltero
+   magassag tenyleges meretkulonbseget okozna. A magassag a vaszon negy
+   erteke­nek atlaga, a talpvonal es a vizszintes kozep szinten a vaszone. */
+.rfig{position:absolute;width:auto;left:163px;top:14px;height:352px;transform:translateX(-50%);}
+/* A tigris es a vidra OPTIKAILAG nagyobb azonos befoglalo-magassagnal: a
+   tigris guggolo, szeles allasu (a torzs es a fej igy aranyosan nagyobb), a
+   vidranak pedig semmi nem all a feje folott, tehat a teljes doboz a test.
+   Merve: a vidra fejszelessege a negy atlagahoz kepest +7,2%. Ezert ez a
+   ketto 97%, illetve 96,5% - a talpvonal valtozatlan, a kulonbseg felul jon ki. */
+.rbody[data-rbody="athlete"] .rfig{height:341px;top:25px;}
+.rbody[data-rbody="coach"] .rfig{height:340px;top:26px;}
+.rdeco{position:absolute;left:0;top:0;width:1280px;height:558px;overflow:visible;transform-origin:0 0;transform:translate(-335.16px,0) scale(0.56);}
+/* A szerepcim sulya a szekciocimevel egyezik (600) - a meret kulonbozik. */
+.rbody h3{font-weight:600;font-size:28px;line-height:1.08;margin-bottom:8px;}
+.rbody ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.rbody li{display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.5;color:var(--ink2);}
+.rbody li::before{content:"";width:18px;height:7px;border-radius:999px;margin-top:9px;flex-shrink:0;background:currentColor;}
+.rbody[data-rbody="athlete"] li::before{background:var(--pink);}
+.rbody[data-rbody="parent"] li::before{background:var(--sun);}
+.rbody[data-rbody="coach"] li::before{background:var(--night);}
+.rbody[data-rbody="club"] li::before{background:var(--blue);}
+/* Tudtad? */
+.know h3{font-weight:600;font-size:21px;line-height:1.15;margin-top:26px;}
+.know p{margin-top:12px;font-size:15px;line-height:1.6;color:var(--sub);}
+/* Teljes szelessegen a logo 12-12 px-re all a tartalom szelétol: igy nem er
+   hozza a szekcio margojahoz. Asztalin sajat oszlopa van, ott nincs padding. */
+.know-logo{display:block;width:100%;height:auto;margin-top:40px;padding:0 12px;}
+/* Amiert csinaljuk */
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);}
+.vcards{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:22px;}
+.vcard{border-radius:24px;padding:24px 24px 26px;color:var(--white);display:flex;flex-direction:column;gap:6px;}
+.vcard h3{font-weight:600;font-size:30px;line-height:1;overflow-wrap:break-word;}
+.vcard p{font-size:16px;line-height:24px;}
+.v-blue{background:var(--blue);}
+.v-night{background:var(--night);}
+.v-pink{background:var(--pink);}
+/* Sportagak */
+.pills{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+.pills li{display:flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-weight:700;font-size:16px;color:var(--white);}
+.pills .when{font-weight:600;font-size:12px;}
+.s-night{background:var(--night);}
+.s-pink{background:var(--pink);}
+.s-blue{background:var(--blue);}
+.pills .soon{padding:10px 16px;font-weight:600;font-size:15px;color:var(--ink);border:2px dashed var(--dash);}
+.pills .ask{background:var(--sun);color:var(--night);}
+/* Felhivas */
+.cta{position:relative;overflow:hidden;}
+.cta .sec-in{position:relative;z-index:1;}
+/* Sotet szekcio (tervezoi dontes, 2026-10-30): a masodlagos gomb a hos blokk
+   atlatszo valtozata lesz, a diszvonalak also retege pedig a sotet hatteret
+   viszi - papir alatretegen vilagos vonalak latszodnanak. */
+/* A szoveg nem futhat a diszvonalak ala: a vonalak a 1280-as vasznon 752-nel
+   kezdodnek, a tartalom 72-nel - ezert a bekezdes legfeljebb 650 szeles. */
+.cta p{margin-top:12px;font-size:16px;line-height:1.55;color:var(--sub);max-width:650px;}
+.cta .ctas{margin-top:24px;}
+/* A diszvonalak csak ott latszanak, ahol a szoveg MELLETT allnak. */
+.cta-deco{display:none;}
+/* Lablec (vaszon): sotet alap, balra a logo es a cegsor, jobbra a lapok.
+   Mobilon egymas alatt, asztalin egy sorban. A vaszon "GrowTogether
+   SportsLab"-ot ir - a lapon a termek neve all (`GrowTogether SportsClub`),
+   mert a "SportsLab" egyetlen nyilvanos lapon sem szerepel, az adatkezelot
+   pedig a tajekoztato nevezi meg. */
+footer{background:var(--night);border-top:1px solid rgba(210,206,231,.14);}
+.foot{max-width:1280px;margin:0 auto;padding:32px 22px;display:flex;flex-direction:column;gap:16px;}
+.foot-id{display:flex;flex-direction:column;gap:16px;}
+.foot-home{display:block;align-self:flex-start;}
+.foot-logo{display:block;width:112px;height:auto;}
+.foot-org{font-size:13px;line-height:1.6;color:#8F88B0;}
+.foot-org a{color:var(--dim);text-decoration:none;}
+.foot-org a:hover{text-decoration:underline;}
+.foot-links{list-style:none;display:flex;flex-wrap:wrap;gap:6px 24px;}
+.foot-links a{display:inline-block;padding:6px 0;font-size:15px;font-weight:600;color:var(--dim);text-decoration:none;}
+.foot-links a:hover{text-decoration:underline;}
+/* Script nelkul mindket nyelv es mind a negy szerep latszik; a script csak az egyiket mutatja. */
 .js [data-lang]:not(.on){display:none;}
-@media (max-width:640px){header{padding:52px 16px 26px;}main{padding:8px 16px 32px;}footer{padding:20px 16px 26px;}.lang{top:12px;right:12px;}}
+@media (min-width:640px){
+  .intro{padding:40px 40px 0;max-width:720px;gap:24px;}
+  .pill{font-size:13px;padding:8px 14px;gap:10px;}
+  .pill .dot{width:8px;height:8px;}
+  h1{font-size:60px;line-height:.98;}
+  .lead{font-size:20px;}
+  .ctas{flex-direction:row;gap:20px;margin-top:9px;}
+  .meta{justify-content:flex-start;gap:4px 22px;font-size:14px;}
+  .foot{padding:40px 40px;}
+  .sec-in{padding:72px 40px;}
+  .why .sec-in{padding-bottom:0;}
+  .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;}
+  .vcards{gap:20px;}
+  /* A vaszonon a gombok tartalomszelesek, egy sorban - nem feszulnek ki. */
+  .roles{display:flex;flex-wrap:wrap;gap:12px;}
+  .rbtn{padding:0 20px;}
+  .rart{margin:10px -40px 0;}
+}
+@media (min-width:768px){
+  .top{height:96px;padding:0 40px;}
+  .logo svg{width:150px;}
+  .top-cta{display:block;}
+  .mainnav{display:flex;}
+  .js .burger{display:none;}
+  .menu{display:none;}
+  .know{position:relative;}
+  .know p{width:470px;max-width:100%;}
+}
+/* AMIKOR AZ ERTEKKARTYAK EGYMAS ALA TORNEK, A SPORTAGAK IS.
+   Az ertekkartyak cime egyetlen hosszu szo is lehet ("Csapatmunka" 30 px-en
+   182 px), ami nem tud torni. Harom hasabnal a kartya belseje 813 px-es
+   nezetig nem eri el a szukseges 231-et - ott a cim kifutna a kartyabol.
+   Ezert a harom hasab csak 900-tol all be (ott a hasab 260, a szoveg 212 -
+   30 px tartalek a betoltes elotti tartalek-betunek is). Ugyanitt all be a
+   sportagak ket oszlopa: ahol a kartyak egymas alatt vannak, ott a pirulak
+   se alljanak a szoveg MELLE, hanem alatta. Vegso haloként a kartyacimen
+   `overflow-wrap: break-word`. */
+@media (min-width:900px){
+  .vcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));}
+  .sports-in{display:flex;gap:64px;align-items:center;}
+  .sports .sec-head{width:460px;flex-shrink:0;gap:16px;}
+  .sports .pills{margin-top:0;}
+}
+@media (min-width:1200px){
+  .lead br.wide{display:inline;}
+  .hero-in{height:820px;}
+  .top{padding:0 72px;}
+  .intro{padding:64px 72px 0;max-width:784px;gap:26px;}
+  h1{font-size:76px;position:relative;top:6px;}
+  .lead br{display:inline;}
+  .meta{margin-top:4px;}
+  .art{position:static;margin:0;max-width:none;aspect-ratio:auto;}
+  .deco-m{display:none;}
+  .deco-d{display:block;width:1280px;height:820px;}
+  .art img{left:636px;top:146px;width:583px;height:620px;transform:rotate(-11deg);}
+  .foot{padding:48px 72px;flex-direction:row;justify-content:space-between;align-items:center;}
+  .foot-id{flex-direction:row;align-items:center;gap:28px;}
+  .foot-logo{width:132px;}
+  .foot-org{font-size:14px;line-height:1.5;}
+  .foot-links{gap:28px;}
+  .sec-in{padding:96px 72px;}
+  h2{font-size:46px;line-height:1.04;letter-spacing:-.02em;}
+  h3{font-size:23px;line-height:1.15;}
+  .sec-lead{font-size:17px;line-height:26px;}
+  .feat .sec-in{padding-bottom:120px;}
+  .sports .sec-in{padding-bottom:118px;}
+  .why .sec-in{padding-top:80px;padding-bottom:0;}
+  .why .sec-head{max-width:760px;}
+  .vcards{margin-top:37px;}
+  .pills{gap:12px;}
+  .feat .sec-head{flex-direction:row;justify-content:space-between;align-items:flex-end;gap:40px;}
+  .feat h2{max-width:620px;}
+  .feat .sec-lead{width:365px;flex-shrink:0;margin-bottom:3px;}
+  .cards{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:30px;}
+  .card{flex-direction:column;border-radius:32px;padding:28px;gap:0;}
+  .tick{display:none;}
+  .tick-d{display:block;margin-bottom:12px;}
+  .card p{font-size:16px;margin-top:9px;}
+  /* A vaszon szerint: 558 magas szekcio, a kabala alul levagva. A szoveg
+     oszlopa 560-nal zar, hogy soha ne fusson a kabala ala. */
+  .who{height:558px;}
+  .who .sec-in{padding-bottom:0;}
+  /* Kozos szovegmagassag CSAK itt, ahol a kabala a szoveg MELLETT all: a
+     szekcio fix 558 magas es overflow:hidden, enelkul a szoveg alja
+     szerepenkent 30 es 126 px kozt allna a szekcio aljatol. Ahol a kabala a
+     szoveg ALA kerul, a szekcio a szoveggel egyutt no - ott ez csak ures
+     helyet csinalna. A szam a leghosszabb szerepe. */
+  .rtext{max-width:600px;min-height:218px;}
+  .rart{position:absolute;left:0;top:0;width:100%;height:558px;margin:0;overflow:visible;pointer-events:none;}
+  .rart-in{max-width:1280px;}
+  .rdeco{transform:none;}
+  .rfade{display:none;}
+  .rfig{left:890px;top:22px;height:628px;}
+  .rbody[data-rbody="athlete"] .rfig{height:609px;top:41px;}
+  .rbody[data-rbody="coach"] .rfig{height:606px;top:44px;}
+  .roles{margin-top:50px;}
+  .rbody{margin-top:30px;}
+  .rbody h3{font-size:40px;line-height:1.05;margin-bottom:19px;}
+  .rbody ul{gap:11px;}
+  .rbody li{font-size:18px;gap:14px;}
+  .rbody li::before{width:22px;height:8px;}
+  .know h3{font-size:24px;line-height:1.1;margin-top:57px;}
+  .know p{margin-top:18px;font-size:16px;line-height:24px;}
+  /* A vaszonon a logo a szoveg jobb oldalan all (x=664, y=125); a 470-es
+     szovegoszlop utan 122 px a tavolsag, a logo 482 szeles. */
+  .know [data-lang]{display:grid;grid-template-columns:minmax(0,470px) minmax(0,482px);column-gap:122px;}
+  .know .sec-head,.know h3,.know p{grid-column:1;}
+  .know-logo{grid-column:2;grid-row:1 / span 3;align-self:start;width:100%;margin-top:29px;padding:0;}
+  .eyebrow{font-size:14px;}
+  .vcard{border-radius:32px;padding:36px 40px;min-height:260px;gap:7px;}
+  .vcard h3{font-size:40px;}
+  .vcard p{font-size:17px;line-height:26px;}
+  .pills li{padding:14px 22px;font-size:18px;gap:10px;}
+  .pills .when{font-size:13px;}
+  .pills .soon{padding:13px 20px;font-size:17px;}
+  .cta p{font-size:17px;line-height:26px;}
+  .cta .ctas{margin-top:40px;}
+  .cta-deco{display:block;position:absolute;top:0;right:calc(50% - 640px);width:1280px;height:424px;pointer-events:none;overflow:visible;}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-<header>
-  <nav class="lang" aria-label="Nyelv / Language"><a href="#hu" data-set="hu">HU</a><a href="#en" data-set="en">EN</a></nav>
-  <div data-lang="hu">
-    <p class="brand">GrowTogether SportsClub</p>
-    <h1>Klubmenedzsment sportegyesületeknek</h1>
-    <p class="sub">Edzések, versenyek, jelenlét és üzenetek egy helyen: edzőknek, sportolóknak és szülőknek.</p>
+<svg class="sprite" aria-hidden="true"><symbol id="gtlogo" viewBox="0 0 444.596 156.741"><g> <g> <g> <path d="M53.375,58.641c-1.38-19.61-7.16-38.7-16.93-55.69l4.47-2.57c1.37-.79,3.13-.31,3.89,1.07,10.35,18.92,16.13,40.15,16.84,61.81l-8.27-4.62Z" fill="#e50051"></path> <path d="M43.995,117.181l9.94-3.62c-5.4,15.43-13.51,29.9-24.06,42.62l-4.02-3.33c-1.19-.99-1.35-2.75-.39-3.97,7.68-9.68,13.9-20.37,18.53-31.7Z" fill="#e50051"></path> <path d="M59.935,89.951c-1.01,6.23-2.44,12.36-4.28,18.37l-9.03,1.85c1.92-5.57,3.45-11.27,4.6-17.06l8.71-3.16Z" fill="#e50051"></path> <path d="M61.715,69.261c-.05,4.9-.36,9.77-.94,14.61-.76-.72-1.77-1.38-1.8.11l-6.67,2.84c.93-6.26,1.4-12.61,1.4-18.99,0-.77-.01-1.54-.02-2.31l8.03,3.74Z" fill="#e50051"></path> </g> <g> <path d="M2.375,97.831l100.15-36.45c-.3,3.02-.71,6.01-1.22,8.98L2.455,106.341l-1.78-4.87c-.53-1.48.23-3.1,1.7-3.64Z" fill="#d2cee7"></path> <path d="M136.915,57.401l-29.27,10.65c.69-3.18,1.56-7.03,1.82-9.2l27.37-9.96,1.77,4.87c.54,1.47-.22,3.1-1.69,3.64Z" fill="#d2cee7"></path> </g> <path d="M-.416,47.99h91.533v5.733c0,1.261-1.024,2.285-2.285,2.285H-2.701v-5.733c0-1.261,1.024-2.285,2.285-2.285Z" transform="translate(26.118 -13.811) rotate(25)" fill="#d2cee7"></path> <g> <path d="M9.265,116.761l88.76-32.3c-.96,3.29-2.05,6.53-3.29,9.73L9.345,125.271l-1.77-4.87c-.54-1.47.22-3.1,1.69-3.64Z" fill="#f0b149"></path> <path d="M143.805,76.331l-42.41,15.43c1.4-3.01,3.89-6.8,4.64-9.6.05-.21.08-.42.09-.65l37.6-13.69,1.77,4.87c.54,1.48-.22,3.1-1.69,3.64Z" fill="#f0b149"></path> </g> <path d="M63.762,156.741l-3.272-4.061c-.975-1.209-.783-2.965.406-3.965,29.577-24.876,46.481-61.098,46.481-99.826,0-16.012-2.872-31.661-8.536-46.511l4.813-1.836c1.475-.563,3.141.182,3.673,1.668,5.355,14.961,8.069,30.65,8.069,46.679,0,42.101-18.82,81.412-51.634,107.852Z" fill="#4d6cfa"></path> </g> <g> <g> <path d="M208.876,49.224v16.017c0,1.209-.266,2.167-.794,2.871-.528.706-1.372,1.36-2.53,1.964-1.311.706-3.188,1.311-5.629,1.813-2.443.503-4.899.755-7.367.755-4.785,0-9.055-.844-12.806-2.531-3.753-1.687-6.712-4.306-8.878-7.857-2.166-3.551-3.248-8.096-3.248-13.637,0-5.338,1.107-9.796,3.324-13.373,2.215-3.576,5.175-6.271,8.877-8.084,3.702-1.813,7.794-2.72,12.277-2.72,3.022,0,5.654.328,7.896.982,2.241.655,3.979,1.511,5.214,2.569,1.232,1.058,1.85,2.217,1.85,3.476,0,.957-.264,1.813-.793,2.569-.528.755-1.121,1.335-1.775,1.737-1.359-.855-2.973-1.649-4.835-2.38-1.864-.729-4.155-1.095-6.876-1.095-2.922,0-5.553.63-7.895,1.889-2.342,1.26-4.168,3.111-5.479,5.553-1.31,2.444-1.964,5.402-1.964,8.877,0,3.728.654,6.788,1.964,9.18,1.311,2.393,3.123,4.168,5.44,5.327,2.316,1.159,4.936,1.738,7.857,1.738,1.46,0,2.808-.125,4.042-.378,1.234-.251,2.203-.554,2.909-.907v-10.729h-9.822c-.202-.352-.415-.869-.642-1.549s-.34-1.372-.34-2.078c0-1.36.302-2.354.906-2.984.604-.629,1.436-.944,2.493-.944h12.692c1.158,0,2.104.353,2.834,1.058.729.706,1.096,1.662,1.096,2.871Z" fill="#d2cee7"></path> <path d="M224.589,44.313v10.351h-9.293v-11.106c0-1.258.303-2.329.906-3.211.605-.881,1.461-1.7,2.569-2.456,1.511-.907,3.425-1.662,5.741-2.267s4.811-.907,7.48-.907c4.734,0,7.102,1.461,7.102,4.382,0,.706-.102,1.348-.302,1.926-.202.58-.454,1.096-.756,1.549-.504-.1-1.134-.188-1.889-.264s-1.562-.113-2.417-.113c-1.814,0-3.514.189-5.101.566-1.587.378-2.935.895-4.042,1.549ZM215.296,51.566l9.293.453v19.342c-.404.151-.982.289-1.738.416-.755.125-1.586.188-2.492.188-1.713,0-2.984-.315-3.816-.944-.83-.629-1.246-1.75-1.246-3.362v-16.093Z" fill="#d2cee7"></path> <path d="M276.192,53.605c0,3.879-.756,7.242-2.268,10.086-1.511,2.846-3.639,5.037-6.384,6.573-2.746,1.536-5.981,2.304-9.708,2.304s-6.978-.769-9.747-2.304c-2.771-1.536-4.924-3.714-6.46-6.535-1.537-2.82-2.305-6.196-2.305-10.125,0-3.878.781-7.227,2.343-10.048,1.561-2.82,3.728-4.999,6.497-6.535,2.77-1.536,5.994-2.305,9.672-2.305s6.887.782,9.633,2.342c2.744,1.562,4.885,3.753,6.422,6.573,1.535,2.821,2.305,6.146,2.305,9.973ZM257.757,42.122c-2.72,0-4.873,1.008-6.46,3.022-1.587,2.015-2.38,4.835-2.38,8.462,0,3.728.78,6.586,2.342,8.576,1.561,1.99,3.752,2.984,6.574,2.984,2.77,0,4.936-1.007,6.497-3.022,1.561-2.014,2.343-4.86,2.343-8.538,0-3.576-.782-6.384-2.343-8.424-1.562-2.04-3.753-3.06-6.573-3.06Z" fill="#d2cee7"></path> <path d="M304.675,48.09c-.654,2.771-1.436,5.579-2.342,8.424-.906,2.846-1.764,5.515-2.568,8.008-.807,2.493-1.512,4.546-2.115,6.158-.505.453-1.185.806-2.041,1.058s-1.914.378-3.173.378c-1.36,0-2.581-.215-3.664-.642-1.084-.428-1.827-1.045-2.229-1.851-.453-1.007-.981-2.456-1.586-4.344-.604-1.889-1.223-4.042-1.852-6.46-.63-2.418-1.26-4.936-1.889-7.555-.631-2.619-1.209-5.163-1.737-7.631-.529-2.467-.971-4.659-1.322-6.573.554-.554,1.247-1.032,2.077-1.436.832-.402,1.775-.604,2.834-.604,1.359,0,2.442.328,3.248.982.806.655,1.31,1.737,1.512,3.249.502,2.922.982,5.68,1.436,8.273.453,2.595.906,4.949,1.359,7.064.453,2.115.844,3.917,1.172,5.402.326,1.486.566,2.607.717,3.362h.303c.352-1.158.881-2.996,1.586-5.516.705-2.518,1.549-5.402,2.531-8.651.982-3.249,1.951-6.56,2.909-9.935.704-.352,1.447-.642,2.229-.869.779-.227,1.674-.34,2.682-.34,1.309,0,2.418.215,3.324.643.906.428,1.512,1.095,1.812,2.002,1.008,3.224,1.952,6.359,2.834,9.406.881,3.048,1.662,5.742,2.342,8.084.68,2.342,1.172,4.093,1.474,5.251h.378c.855-4.18,1.762-8.613,2.72-13.297.956-4.685,1.763-9.343,2.417-13.978,1.26-.755,2.645-1.133,4.156-1.133,1.309,0,2.367.291,3.174.869.805.58,1.208,1.524,1.208,2.833,0,.706-.14,1.839-.415,3.4-.277,1.562-.656,3.375-1.134,5.44-.479,2.066-1.021,4.257-1.624,6.573-.604,2.317-1.223,4.56-1.852,6.725-.631,2.166-1.222,4.105-1.775,5.817-.555,1.713-1.033,3.048-1.436,4.004-.453.404-1.184.744-2.191,1.02s-2.115.416-3.324.416c-3.123,0-4.937-.755-5.439-2.267-.604-1.511-1.297-3.45-2.078-5.818-.781-2.367-1.562-4.936-2.342-7.706-.781-2.77-1.549-5.516-2.305-8.235Z" fill="#d2cee7"></path> </g> <g> <path d="M187.947,81.333l.151,7.782h-21.23c-.253-.403-.479-.932-.68-1.587-.202-.654-.303-1.385-.303-2.191,0-1.36.303-2.367.906-3.022.605-.654,1.436-.982,2.494-.982h18.661ZM179.712,87.075h9.52v39.968c-.403.151-1.02.289-1.851.416-.831.125-1.675.188-2.531.188-1.864,0-3.187-.34-3.966-1.02-.782-.68-1.172-1.825-1.172-3.438v-36.114ZM181.224,89.115l-.227-7.782h21.23c.251.353.478.869.68,1.549.2.68.302,1.398.302,2.153,0,1.311-.302,2.317-.907,3.022-.604.706-1.436,1.058-2.492,1.058h-18.586Z" fill="#d2cee7"></path> <path d="M237.058,109.288c0,3.879-.756,7.242-2.268,10.086-1.511,2.846-3.639,5.037-6.384,6.573-2.746,1.536-5.981,2.304-9.708,2.304s-6.978-.769-9.747-2.304c-2.771-1.536-4.924-3.714-6.46-6.535-1.537-2.82-2.305-6.196-2.305-10.125,0-3.878.781-7.227,2.343-10.048,1.561-2.82,3.728-4.999,6.497-6.535,2.77-1.536,5.994-2.305,9.672-2.305s6.887.782,9.633,2.342c2.744,1.562,4.885,3.753,6.422,6.573,1.535,2.821,2.305,6.146,2.305,9.973ZM218.622,97.804c-2.72,0-4.873,1.008-6.46,3.022-1.587,2.015-2.38,4.835-2.38,8.462,0,3.728.78,6.586,2.342,8.576,1.561,1.99,3.752,2.984,6.574,2.984,2.77,0,4.936-1.007,6.497-3.022,1.561-2.014,2.343-4.86,2.343-8.538,0-3.576-.782-6.384-2.343-8.424-1.562-2.04-3.753-3.06-6.573-3.06Z" fill="#d2cee7"></path> <path d="M256.775,125.91c-2.973,0-5.718-.567-8.235-1.7-2.52-1.133-4.533-3.009-6.045-5.629-1.511-2.618-2.266-6.069-2.266-10.351,0-3.929.768-7.215,2.304-9.86,1.536-2.644,3.702-4.633,6.497-5.968,2.797-1.334,6.008-2.002,9.634-2.002,2.569,0,4.948.328,7.14.982,2.191.655,3.94,1.411,5.251,2.267.856.555,1.549,1.222,2.077,2.002.529.782.794,1.726.794,2.833v23.572h-9.066v-22.741c-.655-.403-1.462-.756-2.418-1.058-.957-.302-2.142-.453-3.551-.453-2.771,0-5.024.857-6.763,2.569-1.736,1.713-2.605,4.333-2.605,7.857,0,3.879.842,6.599,2.531,8.16,1.687,1.562,3.764,2.342,6.232,2.342,1.914,0,3.463-.327,4.646-.982,1.184-.654,2.178-1.36,2.984-2.115l.303,7.555c-.907.706-2.154,1.335-3.74,1.889-1.587.555-3.488.832-5.704.832ZM265.011,127.42v-7.404h8.915v7.707c0,3.425-.782,6.207-2.343,8.349-1.561,2.14-3.689,3.714-6.384,4.722-2.694,1.007-5.704,1.511-9.028,1.511-2.619,0-4.899-.253-6.838-.756-1.939-.504-3.361-1.033-4.269-1.586-1.662-1.008-2.493-2.393-2.493-4.155,0-.907.201-1.713.604-2.418.402-.706.88-1.235,1.436-1.586,1.259.805,2.833,1.511,4.722,2.115s3.891.907,6.007.907c3.022,0,5.389-.593,7.102-1.775,1.712-1.184,2.569-3.06,2.569-5.629Z" fill="#d2cee7"></path> <path d="M284.577,114.048l-.377-6.498,20.248-3.022c-.15-1.914-.882-3.576-2.191-4.986-1.311-1.41-3.224-2.116-5.742-2.116-2.568,0-4.709.895-6.422,2.682-1.713,1.789-2.594,4.344-2.645,7.669l.228,3.929c.453,3.224,1.7,5.591,3.739,7.102,2.041,1.511,4.621,2.267,7.744,2.267,2.115,0,4.08-.314,5.894-.945,1.813-.629,3.249-1.322,4.307-2.078.704.454,1.271,1.02,1.7,1.7.427.68.643,1.424.643,2.229,0,1.311-.58,2.431-1.738,3.362-1.16.933-2.721,1.65-4.685,2.153s-4.206.755-6.724.755c-3.88,0-7.317-.718-10.313-2.153-2.997-1.436-5.339-3.588-7.026-6.459s-2.531-6.447-2.531-10.729c0-3.072.479-5.767,1.436-8.084.957-2.316,2.254-4.243,3.891-5.78,1.637-1.536,3.539-2.694,5.705-3.475,2.164-.781,4.432-1.171,6.799-1.171,3.324,0,6.234.668,8.727,2.002,2.494,1.335,4.458,3.186,5.894,5.553,1.436,2.368,2.153,5.088,2.153,8.16,0,1.411-.366,2.455-1.096,3.135-.73.68-1.75,1.096-3.06,1.247l-24.556,3.551Z" fill="#d2cee7"></path> <path d="M327.114,109.288h-9.293v-27.199c.402-.151.993-.302,1.775-.454.779-.151,1.598-.227,2.455-.227,1.762,0,3.047.315,3.854.944.805.63,1.209,1.751,1.209,3.362v23.572ZM317.821,107.248h9.293v8.915c0,1.662.49,2.846,1.473,3.551.982.706,2.38,1.058,4.193,1.058.805,0,1.674-.101,2.606-.302.932-.201,1.725-.454,2.38-.756.352.404.68.882.982,1.436.303.555.453,1.235.453,2.04,0,1.461-.693,2.67-2.078,3.626-1.386.957-3.539,1.436-6.459,1.436-3.98,0-7.115-.895-9.406-2.682-2.293-1.787-3.438-4.696-3.438-8.726v-9.595ZM323.487,99.542v-7.329h14.809c.2.353.415.857.642,1.511.228.655.341,1.335.341,2.04,0,1.26-.303,2.204-.907,2.833-.604.63-1.386.944-2.343.944h-12.541Z" fill="#d2cee7"></path> <path d="M353.178,112.008h-9.293v-33.923c.403-.101.982-.227,1.737-.378.756-.151,1.588-.227,2.494-.227,1.762,0,3.047.315,3.854.944.805.63,1.208,1.75,1.208,3.362v30.221ZM343.885,107.248h9.293v19.795c-.403.151-.981.289-1.737.416-.756.125-1.587.188-2.494.188-1.713,0-2.983-.315-3.814-.944-.832-.629-1.247-1.75-1.247-3.362v-16.093ZM376.901,111.932h-9.293v-6.8c0-2.569-.693-4.432-2.078-5.591-1.385-1.158-3.135-1.738-5.25-1.738-1.713,0-3.287.328-4.723.982-1.436.655-2.682,1.411-3.74,2.267l-.528-7.555c1.158-.705,2.645-1.397,4.458-2.078,1.812-.68,3.854-1.02,6.119-1.02,4.533,0,8.172,1.184,10.918,3.551,2.744,2.368,4.117,5.944,4.117,10.729v7.253ZM367.608,107.323h9.293v19.72c-.403.151-.995.289-1.775.416-.781.125-1.6.188-2.455.188-1.764,0-3.049-.315-3.854-.944-.807-.629-1.209-1.75-1.209-3.362v-16.018Z" fill="#d2cee7"></path> <path d="M387.629,114.048l-.378-6.498,20.248-3.022c-.15-1.914-.881-3.576-2.19-4.986-1.311-1.41-3.224-2.116-5.742-2.116-2.569,0-4.71.895-6.422,2.682-1.713,1.789-2.595,4.344-2.645,7.669l.228,3.929c.453,3.224,1.699,5.591,3.739,7.102,2.04,1.511,4.62,2.267,7.744,2.267,2.115,0,4.079-.314,5.894-.945,1.812-.629,3.248-1.322,4.307-2.078.704.454,1.271,1.02,1.699,1.7.428.68.643,1.424.643,2.229,0,1.311-.58,2.431-1.738,3.362-1.159.933-2.72,1.65-4.684,2.153-1.965.503-4.207.755-6.725.755-3.879,0-7.316-.718-10.312-2.153-2.998-1.436-5.34-3.588-7.027-6.459s-2.531-6.447-2.531-10.729c0-3.072.479-5.767,1.436-8.084.957-2.316,2.254-4.243,3.892-5.78,1.636-1.536,3.538-2.694,5.704-3.475,2.165-.781,4.432-1.171,6.8-1.171,3.324,0,6.233.668,8.727,2.002,2.493,1.335,4.458,3.186,5.894,5.553,1.436,2.368,2.152,5.088,2.152,8.16,0,1.411-.365,2.455-1.096,3.135s-1.75,1.096-3.059,1.247l-24.556,3.551Z" fill="#d2cee7"></path> <path d="M430.089,99.995v10.351h-9.293v-11.106c0-1.258.303-2.329.907-3.211.604-.881,1.46-1.7,2.569-2.456,1.51-.907,3.424-1.662,5.741-2.267,2.316-.604,4.81-.907,7.479-.907,4.734,0,7.103,1.461,7.103,4.382,0,.706-.102,1.348-.302,1.926-.203.58-.454,1.096-.756,1.549-.504-.1-1.134-.188-1.889-.264-.756-.076-1.562-.113-2.418-.113-1.813,0-3.514.189-5.1.566-1.587.378-2.936.895-4.043,1.549ZM420.796,107.248l9.293.453v19.342c-.403.151-.982.289-1.737.416-.755.125-1.587.188-2.493.188-1.713,0-2.984-.315-3.815-.944-.831-.629-1.247-1.75-1.247-3.362v-16.093Z" fill="#d2cee7"></path> </g> </g> </g></symbol></svg>
+
+<header class="hero">
+<div class="hero-in">
+  <nav class="top" aria-label="GrowTogether">
+    <a class="logo" href="./" aria-label="GrowTogether SportsClub"><svg aria-hidden="true" viewBox="0 0 444.596 156.741"><use href="#gtlogo"></use></svg></a>
+    <span class="top-r">
+      <span class="mainnav" data-lang="hu"><a href="#funkciok" data-go="funkciok">Funkciók</a><a href="#kinek" data-go="kinek">Kinek</a><a href="#sportagak" data-go="sportagak">Sportágak</a></span>
+      <span class="mainnav" data-lang="en" lang="en"><a href="#funkciok" data-go="funkciok">Features</a><a href="#kinek" data-go="kinek">Who for</a><a href="#sportagak" data-go="sportagak">Sports</a></span>
+      <span class="top-cta" data-lang="hu"><a class="btn btn-sun" href="https://app.growtogethersportsclub.com/join" target="_blank" rel="noopener">Kipróbálom a demót</a></span>
+      <span class="top-cta" data-lang="en" lang="en"><a class="btn btn-sun" href="https://app.growtogethersportsclub.com/join" target="_blank" rel="noopener">Try the demo</a></span>
+      <span class="lang"><a href="#hu" data-set="hu" lang="hu">HU</a><a href="#en" data-set="en" lang="en">EN</a></span>
+      <button type="button" class="burger" aria-controls="menu" aria-expanded="false" aria-label="Menü megnyitása" data-open="Menü megnyitása" data-close="Menü bezárása"><span></span><span></span><span></span></button>
+    </span>
+  </nav>
+
+  <div class="menu" id="menu">
+    <span data-lang="hu"><a href="#funkciok" data-go="funkciok">Funkciók</a><a href="#kinek" data-go="kinek">Kinek</a><a href="#sportagak" data-go="sportagak">Sportágak</a><a class="btn btn-sun" href="https://app.growtogethersportsclub.com/join" target="_blank" rel="noopener">Kipróbálom a demót</a></span>
+    <span data-lang="en" lang="en"><a href="#funkciok" data-go="funkciok">Features</a><a href="#kinek" data-go="kinek">Who for</a><a href="#sportagak" data-go="sportagak">Sports</a><a class="btn btn-sun" href="https://app.growtogethersportsclub.com/join" target="_blank" rel="noopener">Try the demo</a></span>
   </div>
-  <div data-lang="en" lang="en">
-    <p class="brand">GrowTogether SportsClub</p>
-    <h1>Club management for sports clubs</h1>
-    <p class="sub">Trainings, competitions, attendance and messages in one place, for coaches, athletes and parents.</p>
+
+  <div data-lang="hu" class="intro">
+    <p class="pill"><span class="dot"></span>Sportegyesületi app · gyerekeknek, edzőknek, szülőknek</p>
+    <h1>Egy app,<br>amivel a klubban<br><em>mindenki nyer.</em></h1>
+    <p class="lead">Jelenlét, versenynap, üzenetek és papírok egy helyen.<br> Megkönnyíti a gyerek, a szülő és az edző dolgát is.<br> Kis szakosztályban és nagy egyesületben egyaránt.</p>
+    <p class="ctas"><a class="btn btn-sun" href="https://app.growtogethersportsclub.com/join" target="_blank" rel="noopener">Kipróbálom a demót</a><a class="btn btn-ghost" href="mailto:hello@growtogethersportsclub.com?subject=Aj%C3%A1nlom%20a%20klubom">Ajánlom a klubom</a></p>
+    <ul class="meta"><li>iOS · Android · web</li><li>GDPR, szülői fiók</li><li>Kódos, zárt belépés</li></ul>
   </div>
+  <div data-lang="en" class="intro" lang="en">
+    <p class="pill"><span class="dot"></span>Sports club app · for kids, coaches and parents</p>
+    <h1>One app<br>where everyone<br><em>in the club wins.</em></h1>
+    <p class="lead">Attendance, competition days, messages and paperwork<br class="wide"> in one place. Easier for kids, parents and coaches alike.<br> For small sections and large clubs.</p>
+    <p class="ctas"><a class="btn btn-sun" href="https://app.growtogethersportsclub.com/join" target="_blank" rel="noopener">Try the demo</a><a class="btn btn-ghost" href="mailto:hello@growtogethersportsclub.com?subject=Recommending%20my%20club">Recommend my club</a></p>
+    <ul class="meta"><li>iOS · Android · web</li><li>GDPR, parent accounts</li><li>Invite-only sign-in</li></ul>
+  </div>
+
+<p class="art">
+    <svg class="deco-d" aria-hidden="true" viewBox="0 0 1280 820"><defs><linearGradient id="heroFadeA" x1="529.615" y1="239.131" x2="754.651" y2="239.131" gradientUnits="userSpaceOnUse"><stop offset="0.0529065" stop-color="#0F0326"></stop><stop offset="1" stop-color="#0F0326" stop-opacity="0"></stop></linearGradient><linearGradient id="heroFadeB" x1="0" y1="23" x2="225.036" y2="23" gradientUnits="userSpaceOnUse"><stop offset="0.0529065" stop-color="#0F0326"></stop><stop offset="1" stop-color="#0F0326" stop-opacity="0"></stop></linearGradient><clipPath id="heroClipD"><rect x="-6000" y="0" width="12000" height="820"></rect></clipPath></defs><g clip-path="url(#heroClipD)"><path d="M558.5 253.16L4029.71 1897.42" stroke="#0F0326" stroke-width="19" stroke-linecap="round" fill="none"></path><path d="M530.29 232.39L4010.53 1880.94L4004.54 1893.59L520.68 243.33L524.96 234.29C525.185 233.815 525.502 233.389 525.891 233.037C526.281 232.684 526.737 232.412 527.232 232.236C527.726 232.059 528.251 231.982 528.776 232.009C529.301 232.035 529.815 232.165 530.29 232.39Z" fill="#D2CEE7"></path><path d="M601.23 955L4130.22 -368.37" stroke="#0F0326" stroke-width="19" stroke-linecap="round" fill="none"></path><path d="M600 970L4128.99 -353.37" stroke="#EFB349" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M766.69 -28.8701C859.724 243.583 833.1 539.387 686.82 858.54" stroke="#0F0326" stroke-width="19" stroke-linecap="round" fill="none"></path><path d="M770 -30C863.333 243.333 836.667 540 690 860" stroke="#E50051" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M521.23 703.28L4130.22 -650.09" stroke="#0F0326" stroke-width="19" stroke-linecap="round" fill="none"></path><path d="M514.73 694.5L4133.09 -662.37L4138 -649.26L515.9 709.01L512.39 699.65C512.018 698.657 512.055 697.556 512.494 696.59C512.932 695.625 513.737 694.873 514.73 694.5Z" fill="#D2CEE7"></path><path d="M1026.61 -29.1201C1106.34 276.48 1039.86 575.5 827.17 867.94" stroke="#0F0326" stroke-width="21" stroke-linecap="round" fill="none"></path><path d="M1030 -30C1110 276.667 1043.33 576.667 830 870" stroke="#4D6CFA" stroke-width="16" stroke-linecap="round" fill="none"></path><rect x="529.615" y="216.131" width="225.036" height="46" transform="rotate(24.5944 529.615 216.131)" fill="url(#heroFadeA)"></rect><rect width="225.036" height="46" transform="matrix(0.926177 -0.377089 -0.377089 -0.926177 518.346 722.463)" fill="url(#heroFadeB)"></rect></g></svg>
+    <svg class="deco-m" aria-hidden="true" viewBox="0 0 390 550"><defs><linearGradient id="mHeroFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0.1" stop-color="#0F0326"></stop><stop offset="1" stop-color="#0F0326" stop-opacity="0"></stop></linearGradient><clipPath id="heroClipM"><rect x="-6000" y="0" width="12000" height="550"></rect></clipPath></defs><g clip-path="url(#heroClipM)"><g transform="translate(-466.68 -23.93) scale(0.7009)"><path d="M-2152.71 -1031.11L4029.71 1897.42" stroke="#0F0326" stroke-width="19" stroke-linecap="round" fill="none"></path><path d="M-2180.92 -1051.88L4010.53 1880.94L4004.54 1893.59L-2190.53 -1040.94L-2186.25 -1049.98C-2186.02 -1050.45 -2185.71 -1050.88 -2185.32 -1051.23C-2184.93 -1051.58 -2184.47 -1051.85 -2183.98 -1052.03C-2183.48 -1052.21 -2182.96 -1052.28 -2182.43 -1052.26C-2181.91 -1052.23 -2181.39 -1052.1 -2180.92 -1051.88Z" fill="#D2CEE7"></path><path d="M601.23 955L4130.22 -368.37" stroke="#0F0326" stroke-width="19" stroke-linecap="round" fill="none"></path><path d="M600 970L4128.99 -353.37" stroke="#EFB349" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M766.69 -28.8701C859.724 243.583 833.1 539.387 686.82 858.54" stroke="#0F0326" stroke-width="19" stroke-linecap="round" fill="none"></path><path d="M770 -30C863.333 243.333 836.667 540 690 860" stroke="#E50051" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M-2287.76 1756.64L4130.22 -650.09" stroke="#0F0326" stroke-width="19" stroke-linecap="round" fill="none"></path><path d="M-2294.26 1747.86L4133.09 -662.37L4138 -649.26L-2293.09 1762.37L-2296.6 1753.01C-2296.97 1752.02 -2296.94 1750.91 -2296.5 1749.95C-2296.06 1748.98 -2295.25 1748.23 -2294.26 1747.86Z" fill="#D2CEE7"></path><path d="M1026.61 -29.1201C1106.34 276.48 1039.86 575.5 827.17 867.94" stroke="#0F0326" stroke-width="21" stroke-linecap="round" fill="none"></path><path d="M1030 -30C1110 276.667 1043.33 576.667 830 870" stroke="#4D6CFA" stroke-width="16" stroke-linecap="round" fill="none"></path></g><rect x="-6000" y="0" width="12000" height="120" fill="url(#mHeroFade)"></rect></g></svg>
+    <img src="assets/img/hero-phone-hu.webp" data-src-en="assets/img/hero-phone-en.webp" width="1166" height="1242" alt="A GrowTogether app kezdőképernyője egy telefonon, magyar felülettel" data-alt-en="The GrowTogether app home screen on a phone, in English">
+  </p>
+</div>
 </header>
 
 <main>
-  <div data-lang="hu">
-    <ul class="cards">
-      <li><a href="privacy"><b>Adatkezelési tájékoztató</b><span>Milyen adatot kezelünk, miért, és milyen jogaid vannak.</span></a></li>
-      <li><a href="support"><b>Támogatás</b><span>Kérdés, hiba vagy kérés: így érsz el minket.</span></a></li>
-      <li><a href="delete-account"><b>Fiók és adatok törlése</b><span>Hogyan kérheted a fiókod vagy egyes adataid törlését.</span></a></li>
-      <li><a href="faq"><b>Gyakori kérdések</b><span>Telepítés, regisztráció és első lépések szülőknek és edzőknek.</span></a></li>
-    </ul>
-  </div>
-  <div data-lang="en" lang="en">
-    <ul class="cards">
-      <li><a href="privacy"><b>Privacy notice</b><span>What data we process, why, and what your rights are.</span></a></li>
-      <li><a href="support"><b>Support</b><span>Questions, bugs or requests: how to reach us.</span></a></li>
-      <li><a href="delete-account"><b>Delete your account and data</b><span>How to request deletion of your account or of some of your data.</span></a></li>
-      <li><a href="faq"><b>FAQ</b><span>Installing, signing up and first steps for parents and coaches.</span></a></li>
-    </ul>
-  </div>
+<section id="funkciok" class="sec feat"><div class="sec-in"><div data-lang="hu"><div class="sec-head"><h2>Amit eddig négy app, egy csoportchat és egy mappa csinált.</h2><p class="sec-lead">Mostantól egy helyen. Szakosztályonként kapcsolod be, amire szükség van, az egyesület színeivel és logójával.</p></div><ul class="cards"><li class="card tick-blue"><span class="tick"></span><svg class="tick-d" viewBox="0 0 60 24" width="56" height="22" aria-hidden="true"><path d="M3.7 14.97 L56.55 1.76 L57.76 6.61 A2 2 0 0 1 56.3 9.03 L3.45 22.24 L2.24 17.39 A2 2 0 0 1 3.7 14.97 Z" fill="currentColor"></path></svg><div><h3>Események és jelenlét</h3><p>„Ott leszek / nem leszek” két koppintással, edzői jelenlét, sportorvosi lejárat figyelése.</p></div></li><li class="card tick-pink"><span class="tick"></span><svg class="tick-d" viewBox="0 0 60 24" width="56" height="22" aria-hidden="true"><path d="M3.7 14.97 L56.55 1.76 L57.76 6.61 A2 2 0 0 1 56.3 9.03 L3.45 22.24 L2.24 17.39 A2 2 0 0 1 3.7 14.97 Z" fill="currentColor"></path></svg><div><h3>Versenynap</h3><p>A sorsolásból kiolvasva: ki, mikor, melyik pályán. A szülő a lelátóról is követi.</p></div></li><li class="card tick-sun"><span class="tick"></span><svg class="tick-d" viewBox="0 0 60 24" width="56" height="22" aria-hidden="true"><path d="M3.7 14.97 L56.55 1.76 L57.76 6.61 A2 2 0 0 1 56.3 9.03 L3.45 22.24 L2.24 17.39 A2 2 0 0 1 3.7 14.97 Z" fill="currentColor"></path></svg><div><h3>Célzott üzenetek</h3><p>Csoportnak, korosztálynak, csak a szülőknek, csendes órákkal, nem éjfélkor.</p></div></li><li class="card tick-night"><span class="tick"></span><svg class="tick-d" viewBox="0 0 60 24" width="56" height="22" aria-hidden="true"><path d="M3.7 14.97 L56.55 1.76 L57.76 6.61 A2 2 0 0 1 56.3 9.03 L3.45 22.24 L2.24 17.39 A2 2 0 0 1 3.7 14.97 Z" fill="currentColor"></path></svg><div><h3>Dokumentumok</h3><p>Nyilatkozatok kitöltve, aláírva, visszakereshetően. Digitális aláírás a következő ütemben.</p></div></li><li class="card tick-blue"><span class="tick"></span><svg class="tick-d" viewBox="0 0 60 24" width="56" height="22" aria-hidden="true"><path d="M3.7 14.97 L56.55 1.76 L57.76 6.61 A2 2 0 0 1 56.3 9.03 L3.45 22.24 L2.24 17.39 A2 2 0 0 1 3.7 14.97 Z" fill="currentColor"></path></svg><div><h3>Kabala és pontrendszer</h3><p>Hat szint és saját kabala. Ligák és gyűjthető társkabalák a 2. ütemben.</p></div></li><li class="card tick-pink"><span class="tick"></span><svg class="tick-d" viewBox="0 0 60 24" width="56" height="22" aria-hidden="true"><path d="M3.7 14.97 L56.55 1.76 L57.76 6.61 A2 2 0 0 1 56.3 9.03 L3.45 22.24 L2.24 17.39 A2 2 0 0 1 3.7 14.97 Z" fill="currentColor"></path></svg><div><h3>Biztonságos adatkezelés</h3><p>Szülői fiók 16 év alatt, kódos meghívás, adatminimum, EU-s szerver.</p></div></li></ul></div><div data-lang="en" lang="en"><div class="sec-head"><h2>What used to take four apps, a group chat and a folder.</h2><p class="sec-lead">From now on in one place. You switch on per section what is needed, with the club colours and logo.</p></div><ul class="cards"><li class="card tick-blue"><span class="tick"></span><svg class="tick-d" viewBox="0 0 60 24" width="56" height="22" aria-hidden="true"><path d="M3.7 14.97 L56.55 1.76 L57.76 6.61 A2 2 0 0 1 56.3 9.03 L3.45 22.24 L2.24 17.39 A2 2 0 0 1 3.7 14.97 Z" fill="currentColor"></path></svg><div><h3>Events and attendance</h3><p>Yes or no in two taps, coach attendance, sports medical expiry reminders.</p></div></li><li class="card tick-pink"><span class="tick"></span><svg class="tick-d" viewBox="0 0 60 24" width="56" height="22" aria-hidden="true"><path d="M3.7 14.97 L56.55 1.76 L57.76 6.61 A2 2 0 0 1 56.3 9.03 L3.45 22.24 L2.24 17.39 A2 2 0 0 1 3.7 14.97 Z" fill="currentColor"></path></svg><div><h3>Competition day</h3><p>Read from the draw: who, when and on which court. Parents follow from the stands.</p></div></li><li class="card tick-sun"><span class="tick"></span><svg class="tick-d" viewBox="0 0 60 24" width="56" height="22" aria-hidden="true"><path d="M3.7 14.97 L56.55 1.76 L57.76 6.61 A2 2 0 0 1 56.3 9.03 L3.45 22.24 L2.24 17.39 A2 2 0 0 1 3.7 14.97 Z" fill="currentColor"></path></svg><div><h3>Targeted messages</h3><p>To a group, an age band or only the parents, with quiet hours, never at midnight.</p></div></li><li class="card tick-night"><span class="tick"></span><svg class="tick-d" viewBox="0 0 60 24" width="56" height="22" aria-hidden="true"><path d="M3.7 14.97 L56.55 1.76 L57.76 6.61 A2 2 0 0 1 56.3 9.03 L3.45 22.24 L2.24 17.39 A2 2 0 0 1 3.7 14.97 Z" fill="currentColor"></path></svg><div><h3>Documents</h3><p>Declarations filled in, signed and searchable. Digital signature in the next phase.</p></div></li><li class="card tick-blue"><span class="tick"></span><svg class="tick-d" viewBox="0 0 60 24" width="56" height="22" aria-hidden="true"><path d="M3.7 14.97 L56.55 1.76 L57.76 6.61 A2 2 0 0 1 56.3 9.03 L3.45 22.24 L2.24 17.39 A2 2 0 0 1 3.7 14.97 Z" fill="currentColor"></path></svg><div><h3>Mascot and points</h3><p>Six levels and your own mascot. Leagues and collectible companions in phase 2.</p></div></li><li class="card tick-pink"><span class="tick"></span><svg class="tick-d" viewBox="0 0 60 24" width="56" height="22" aria-hidden="true"><path d="M3.7 14.97 L56.55 1.76 L57.76 6.61 A2 2 0 0 1 56.3 9.03 L3.45 22.24 L2.24 17.39 A2 2 0 0 1 3.7 14.97 Z" fill="currentColor"></path></svg><div><h3>Safe data handling</h3><p>Parent accounts under 16, invite codes, data minimisation, EU servers.</p></div></li></ul></div></div></section>
+
+<section id="kinek" class="sec white who"><div class="sec-in"><div data-lang="hu"><div class="sec-head"><h2>Mit ad a GrowTogether?</h2></div><div class="roles"><button type="button" class="rbtn on" data-role="athlete" aria-pressed="true">Sportolónak</button><button type="button" class="rbtn" data-role="parent" aria-pressed="false">Szülőnek</button><button type="button" class="rbtn" data-role="coach" aria-pressed="false">Edzőnek</button><button type="button" class="rbtn" data-role="club" aria-pressed="false">Egyesületnek</button></div><div class="rbody on" data-rbody="athlete"><div class="rtext"><h3>Minden edzésed számít.</h3><ul><li>Közös csapatcél: a barátaiddal együtt haladsz előre.</li><li>Minden edzés XP. A megszerzett szint megmarad, büntetőpont nincs.</li><li>A heti széria befagyasztható betegség vagy nyaralás idejére.</li></ul></div><span class="rart"><span class="rart-in"><img class="rfig" src="assets/img/role-athlete.webp" width="676" height="1067" alt="Tigris kabala taekwondo ruhában" data-alt-en="Tiger mascot in a taekwondo uniform"><svg class="rdeco" viewBox="0 0 1280 558" aria-hidden="true"><defs><linearGradient id="artFade-athlete-hu" x1="0" y1="0" x2="0" y2="1"><stop offset="0.1" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"></stop></linearGradient></defs><g transform="translate(0 -1601)"><path d="M611 2177.46L3000 1562.16" stroke="#E50051" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1115 1513C1208.33 1786.33 1181.67 2083 1035 2403" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1122 1513C1215.33 1786.33 1188.67 2083 1042 2403" stroke="#EFB349" stroke-width="14" stroke-linecap="round" fill="none"></path></g><rect class="rfade" x="1009.2" y="0" width="285.8" height="78.6" fill="url(#artFade-athlete-hu)"></rect></svg></span></span></div><div class="rbody" data-rbody="parent"><div class="rtext"><h3>Minden tudnivaló egy helyen.</h3><ul><li>Edzés, verseny és nyilatkozat egy appban.</li><li>Heti rövid összefoglaló az edzésekről.</li><li>Emlékeztető a sportorvosi lejáratról és a hiányzó papírokról.</li></ul></div><span class="rart"><span class="rart-in"><img class="rfig" src="assets/img/role-parent.webp" width="698" height="1118" alt="Koala kabala sporttáskával, integet" data-alt-en="Koala mascot with a sports bag, waving" loading="lazy"><svg class="rdeco" viewBox="0 0 1280 558" aria-hidden="true"><defs><linearGradient id="artFade-parent-hu" x1="0" y1="0" x2="0" y2="1"><stop offset="0.1" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"></stop></linearGradient></defs><g transform="translate(0 -1601)"><path d="M611 2177.46L3000 1562.16" stroke="#EFB349" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1115 1513C1208.33 1786.33 1181.67 2083 1035 2403" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1122 1513C1215.33 1786.33 1188.67 2083 1042 2403" stroke="#E50051" stroke-width="14" stroke-linecap="round" fill="none"></path></g><rect class="rfade" x="1009.2" y="0" width="285.8" height="78.6" fill="url(#artFade-parent-hu)"></rect></svg></span></span></div><div class="rbody" data-rbody="coach"><div class="rtext"><h3>Két koppintás, kész a jelenlét.</h3><ul><li>Jelenlét és igyekezet-pont az edzés végén, papír nélkül.</li><li>Versenynapi beosztás a sorsolásból, gépelés nélkül.</li><li>Jelzés, ha valaki elmaradozik, amíg még vissza lehet hozni.</li></ul></div><span class="rart"><span class="rart-in"><img class="rfig" src="assets/img/role-coach.webp" width="669" height="1059" alt="Vidra kabala melegítőben, síppal és stopperrel" data-alt-en="Otter mascot in a tracksuit with a whistle and a stopwatch" loading="lazy"><svg class="rdeco" viewBox="0 0 1280 558" aria-hidden="true"><defs><linearGradient id="artFade-coach-hu" x1="0" y1="0" x2="0" y2="1"><stop offset="0.1" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"></stop></linearGradient></defs><g transform="translate(0 -1601)"><path d="M611 2177.46L3000 1562.16" stroke="#0F0326" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1115 1513C1208.33 1786.33 1181.67 2083 1035 2403" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1122 1513C1215.33 1786.33 1188.67 2083 1042 2403" stroke="#4D6CFA" stroke-width="14" stroke-linecap="round" fill="none"></path></g><rect class="rfade" x="1009.2" y="0" width="285.8" height="78.6" fill="url(#artFade-coach-hu)"></rect></svg></span></span></div><div class="rbody" data-rbody="club"><div class="rtext"><h3>Rend a szakosztályokban.</h3><ul><li>Kódos meghívásos rendszer az admintól a szülőig.</li><li>Az egyesület színei, logója és saját pontszabályai.</li><li>Ötlet vagy hiba? Egyenesen a fejlesztőknek írhattok.</li></ul></div><span class="rart"><span class="rart-in"><img class="rfig" src="assets/img/role-club.webp" width="723" height="1150" alt="Oroszlán kabala szemüvegben, laptoppal" data-alt-en="Lion mascot with glasses and a laptop" loading="lazy"><svg class="rdeco" viewBox="0 0 1280 558" aria-hidden="true"><defs><linearGradient id="artFade-club-hu" x1="0" y1="0" x2="0" y2="1"><stop offset="0.1" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"></stop></linearGradient></defs><g transform="translate(0 -1601)"><path d="M611 2177.46L3000 1562.16" stroke="#4D6CFA" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1115 1513C1208.33 1786.33 1181.67 2083 1035 2403" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1122 1513C1215.33 1786.33 1188.67 2083 1042 2403" stroke="#E50051" stroke-width="14" stroke-linecap="round" fill="none"></path></g><rect class="rfade" x="1009.2" y="0" width="285.8" height="78.6" fill="url(#artFade-club-hu)"></rect></svg></span></span></div></div><div data-lang="en" lang="en"><div class="sec-head"><h2>What GrowTogether gives you.</h2></div><div class="roles"><button type="button" class="rbtn on" data-role="athlete" aria-pressed="true">For athletes</button><button type="button" class="rbtn" data-role="parent" aria-pressed="false">For parents</button><button type="button" class="rbtn" data-role="coach" aria-pressed="false">For coaches</button><button type="button" class="rbtn" data-role="club" aria-pressed="false">For clubs</button></div><div class="rbody on" data-rbody="athlete"><div class="rtext"><h3>Every session counts.</h3><ul><li>A shared team goal: you move forward together with your friends.</li><li>Every session is XP. Levels you earn stay, there are no penalty points.</li><li>The weekly streak can be frozen for illness or a holiday.</li></ul></div><span class="rart"><span class="rart-in"><img class="rfig" src="assets/img/role-athlete.webp" width="676" height="1067" alt="Tigris kabala taekwondo ruhában" data-alt-en="Tiger mascot in a taekwondo uniform"><svg class="rdeco" viewBox="0 0 1280 558" aria-hidden="true"><defs><linearGradient id="artFade-athlete-en" x1="0" y1="0" x2="0" y2="1"><stop offset="0.1" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"></stop></linearGradient></defs><g transform="translate(0 -1601)"><path d="M611 2177.46L3000 1562.16" stroke="#E50051" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1115 1513C1208.33 1786.33 1181.67 2083 1035 2403" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1122 1513C1215.33 1786.33 1188.67 2083 1042 2403" stroke="#EFB349" stroke-width="14" stroke-linecap="round" fill="none"></path></g><rect class="rfade" x="1009.2" y="0" width="285.8" height="78.6" fill="url(#artFade-athlete-en)"></rect></svg></span></span></div><div class="rbody" data-rbody="parent"><div class="rtext"><h3>Everything you need in one place.</h3><ul><li>Training, competition and declarations in one app.</li><li>A short weekly summary of the sessions.</li><li>Reminders about sports medical expiry and missing paperwork.</li></ul></div><span class="rart"><span class="rart-in"><img class="rfig" src="assets/img/role-parent.webp" width="698" height="1118" alt="Koala kabala sporttáskával, integet" data-alt-en="Koala mascot with a sports bag, waving" loading="lazy"><svg class="rdeco" viewBox="0 0 1280 558" aria-hidden="true"><defs><linearGradient id="artFade-parent-en" x1="0" y1="0" x2="0" y2="1"><stop offset="0.1" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"></stop></linearGradient></defs><g transform="translate(0 -1601)"><path d="M611 2177.46L3000 1562.16" stroke="#EFB349" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1115 1513C1208.33 1786.33 1181.67 2083 1035 2403" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1122 1513C1215.33 1786.33 1188.67 2083 1042 2403" stroke="#E50051" stroke-width="14" stroke-linecap="round" fill="none"></path></g><rect class="rfade" x="1009.2" y="0" width="285.8" height="78.6" fill="url(#artFade-parent-en)"></rect></svg></span></span></div><div class="rbody" data-rbody="coach"><div class="rtext"><h3>Two taps and attendance is done.</h3><ul><li>Attendance and effort points at the end of the session, on paper nowhere.</li><li>Competition day schedule read from the draw, with no typing.</li><li>A nudge when someone starts drifting away, while they can still be brought back.</li></ul></div><span class="rart"><span class="rart-in"><img class="rfig" src="assets/img/role-coach.webp" width="669" height="1059" alt="Vidra kabala melegítőben, síppal és stopperrel" data-alt-en="Otter mascot in a tracksuit with a whistle and a stopwatch" loading="lazy"><svg class="rdeco" viewBox="0 0 1280 558" aria-hidden="true"><defs><linearGradient id="artFade-coach-en" x1="0" y1="0" x2="0" y2="1"><stop offset="0.1" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"></stop></linearGradient></defs><g transform="translate(0 -1601)"><path d="M611 2177.46L3000 1562.16" stroke="#0F0326" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1115 1513C1208.33 1786.33 1181.67 2083 1035 2403" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1122 1513C1215.33 1786.33 1188.67 2083 1042 2403" stroke="#4D6CFA" stroke-width="14" stroke-linecap="round" fill="none"></path></g><rect class="rfade" x="1009.2" y="0" width="285.8" height="78.6" fill="url(#artFade-coach-en)"></rect></svg></span></span></div><div class="rbody" data-rbody="club"><div class="rtext"><h3>Order across the sections.</h3><ul><li>An invite-code system from the admin down to the parent.</li><li>Your club colours, logo and your own points rules.</li><li>An idea or a bug? You can write straight to the developers.</li></ul></div><span class="rart"><span class="rart-in"><img class="rfig" src="assets/img/role-club.webp" width="723" height="1150" alt="Oroszlán kabala szemüvegben, laptoppal" data-alt-en="Lion mascot with glasses and a laptop" loading="lazy"><svg class="rdeco" viewBox="0 0 1280 558" aria-hidden="true"><defs><linearGradient id="artFade-club-en" x1="0" y1="0" x2="0" y2="1"><stop offset="0.1" stop-color="#FFFFFF"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"></stop></linearGradient></defs><g transform="translate(0 -1601)"><path d="M611 2177.46L3000 1562.16" stroke="#4D6CFA" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1115 1513C1208.33 1786.33 1181.67 2083 1035 2403" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1122 1513C1215.33 1786.33 1188.67 2083 1042 2403" stroke="#E50051" stroke-width="14" stroke-linecap="round" fill="none"></path></g><rect class="rfade" x="1009.2" y="0" width="285.8" height="78.6" fill="url(#artFade-club-en)"></rect></svg></span></span></div></div></div></section>
+
+<section class="sec dark know"><div class="sec-in"><div data-lang="hu"><div class="sec-head"><h2>Tudtad?</h2></div><h3>A küldetés a logó mögött</h3><p>Egy tornaterem padlóján egymást keresztezik a pályák vonalai: kosár, röplabda, kézilabda, tollas, egy teremben, egymás mellett. A GrowTogether ugyanezt teszi egy appban: minden sportág, minden csoport és minden ember egy helyen találkozik.</p><svg class="know-logo" viewBox="0 0 444.596 156.741" role="img" aria-label="GrowTogether"><use href="#gtlogo"></use></svg></div><div data-lang="en" lang="en"><div class="sec-head"><h2>Did you know?</h2></div><h3>The mission behind the logo</h3><p>On a gym floor the court lines cross each other: basketball, volleyball, handball and badminton, in one hall, side by side. GrowTogether does the same in one app: every sport, every group and every person meets in one place.</p><svg class="know-logo" viewBox="0 0 444.596 156.741" role="img" aria-label="GrowTogether"><use href="#gtlogo"></use></svg></div></div></section>
+
+<section class="sec why"><div class="sec-in"><div data-lang="hu"><div class="sec-head"><p class="eyebrow">Amiért csináljuk</p><h2>Aki jól érzi magát, az marad.</h2><p class="sec-lead">A sportpszichológiai kutatások szerint a sportban maradás legerősebb előrejelzője az élvezet, nem az érem. Ezért a GrowTogether az igyekezetet jutalmazza, és a gyerekek felületén nincs nyilvános ranglista.</p></div><ul class="vcards"><li class="vcard v-blue"><h3>Csapatmunka</h3><p>Közös csapatcél és közös terem-dekor. A siker együtt számít.</p></li><li class="vcard v-night"><h3>Kitartás</h3><p>Minden edzés előre visz, ezért nincs visszaesés, csak következő lépés.</p></li><li class="vcard v-pink"><h3>Öröm</h3><p>Erőfeszítés-dicséret, meglepetések, saját kabala, a sport legyen jó.</p></li></ul></div><div data-lang="en" lang="en"><div class="sec-head"><p class="eyebrow">Why we do it</p><h2>Those who enjoy it, stay.</h2><p class="sec-lead">Sports psychology research finds that enjoyment, not medals, is the strongest predictor of staying in sport. That is why GrowTogether rewards effort, and why there is no public leaderboard on the children’s screens.</p></div><ul class="vcards"><li class="vcard v-blue"><h3>Teamwork</h3><p>A shared team goal and a shared hall decoration. Success counts together.</p></li><li class="vcard v-night"><h3>Persistence</h3><p>Every session moves you forward, so there is no fall back, only a next step.</p></li><li class="vcard v-pink"><h3>Joy</h3><p>Praise for effort, surprises, your own mascot, and sport that feels good.</p></li></ul></div></div></section>
+
+<section id="sportagak" class="sec sports"><div class="sec-in"><div data-lang="hu"><div class="sports-in"><div class="sec-head"><h2>Egy teremben minden sport elfér.</h2><p class="sec-lead">Taekwondóval indultunk, és sportágról sportágra bővülünk. Minden szakosztály a saját versenyrendjét, övét, idejét vagy pontját kapja ugyanabban az appban.</p></div><ul class="pills"><li class="s-night">Taekwondo<span class="when">· pilot</span></li><li class="s-pink">Karate<span class="when">· 2. ütem</span></li><li class="s-blue">Atlétika<span class="when">· 2. ütem</span></li><li class="soon">Gyorskorcsolya</li><li class="soon">Kosárlabda</li><li class="soon">Röplabda</li><li class="soon">Kézilabda</li><li class="soon">Úszás</li><li class="soon">Tollaslabda</li><li class="soon">Dzsúdó</li><li class="soon">Labdarúgás</li><li class="ask">+ a te sportágad?</li></ul></div></div><div data-lang="en" lang="en"><div class="sports-in"><div class="sec-head"><h2>Every sport fits in one hall.</h2><p class="sec-lead">We started with taekwondo and we grow sport by sport. Every section gets its own competition rules, belts, times or points in the same app.</p></div><ul class="pills"><li class="s-night">Taekwondo<span class="when">· pilot</span></li><li class="s-pink">Karate<span class="when">· phase 2</span></li><li class="s-blue">Athletics<span class="when">· phase 2</span></li><li class="soon">Speed skating</li><li class="soon">Basketball</li><li class="soon">Volleyball</li><li class="soon">Handball</li><li class="soon">Swimming</li><li class="soon">Badminton</li><li class="soon">Judo</li><li class="soon">Football</li><li class="ask">+ your sport?</li></ul></div></div></div></section>
+
+<section id="ajanlas" class="sec dark cta"><svg class="cta-deco" aria-hidden="true" viewBox="0 0 1280 424"><defs><clipPath id="ctaClip"><rect x="-6000" y="0" width="12000" height="424"></rect></clipPath><linearGradient id="ctaFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0F0326" stop-opacity="0"></stop><stop offset="1" stop-color="#0F0326"></stop></linearGradient></defs><g clip-path="url(#ctaClip)"><g transform="translate(0 -4085)"><path d="M753.44 4518.19L7353.44 1548.19" stroke="#0F0326" stroke-width="17" stroke-linecap="round" fill="none"></path><path d="M752 4515L7352 1545" stroke="#D2CEE7" stroke-width="12" stroke-linecap="round" fill="none"></path><path d="M869.17 4077.06C974.97 4222.53 988.223 4367.95 908.93 4513.32" stroke="#0F0326" stroke-width="19" stroke-linecap="round" fill="none"></path><path d="M872 4075C978.667 4221.67 992 4368.33 912 4515" stroke="#E50051" stroke-width="14" stroke-linecap="round" fill="none"></path><path d="M1088.98 4076.76C1181.48 4235.33 1171.6 4380.66 1059.33 4512.73" stroke="#0F0326" stroke-width="21" stroke-linecap="round" fill="none"></path><path d="M1092 4075C1185.33 4235 1175.33 4381.67 1062 4515" stroke="#4D6CFA" stroke-width="16" stroke-linecap="round" fill="none"></path><path d="M810.39 4078.11L7350.39 7469.21" stroke="#0F0326" stroke-width="17" stroke-linecap="round" fill="none"></path><path d="M812 4075L7352 7466" stroke="#EFB349" stroke-width="12" stroke-linecap="round" fill="none"></path></g><rect x="700" y="150" width="6000" height="274" fill="url(#ctaFade)"></rect></g></svg><div class="sec-in"><div data-lang="hu"><div class="sec-head"><h2>Szívesen használnád te is?</h2></div><p>Ha nálatok is elindul, az egész klub egy helyen dolgozik: kevesebb papír, kevesebb üzenetváltás, több idő az edzésre. Mindez havonta egy kávé áráért.</p><p>Ajánld a klubodat, hogy nálatok is hamarabb elinduljon. Szülőként, sportolóként és edzőként is megteheted.</p><p class="ctas"><a class="btn btn-sun" href="https://app.growtogethersportsclub.com/join" target="_blank" rel="noopener">Kipróbálom a demót</a><a class="btn btn-ghost" href="mailto:hello@growtogethersportsclub.com?subject=Aj%C3%A1nlom%20a%20klubom">Ajánlom a klubom</a></p></div><div data-lang="en" lang="en"><div class="sec-head"><h2>Would you like to use it too?</h2></div><p>If it launches at your club, the whole club works in one place: less paperwork, fewer messages, more time for training. All for the price of a coffee a month.</p><p>Recommend your club so that it can start sooner with you too. You can do it as a parent, an athlete or a coach.</p><p class="ctas"><a class="btn btn-sun" href="https://app.growtogethersportsclub.com/join" target="_blank" rel="noopener">Try the demo</a><a class="btn btn-ghost" href="mailto:hello@growtogethersportsclub.com?subject=Recommending%20my%20club">Recommend my club</a></p></div></div></section>
 </main>
 
 <footer>
-  <a href="./">GrowTogether SportsClub</a><a href="privacy">Privacy</a><a href="support">Support</a><a href="delete-account">Delete account</a><a href="faq">FAQ</a>
-  · <a href="mailto:hello@growtogethersportsclub.com">hello@growtogethersportsclub.com</a>
+  <div data-lang="hu" class="foot">
+    <div class="foot-id">
+      <a class="foot-home" href="./" aria-label="GrowTogether SportsClub"><svg class="foot-logo" viewBox="0 0 444.596 156.741" role="img" aria-hidden="true"><use href="#gtlogo"></use></svg></a>
+      <p class="foot-org">GrowTogether SportsClub · Budapest<br><a href="mailto:hello@growtogethersportsclub.com">hello@growtogethersportsclub.com</a></p>
+    </div>
+    <ul class="foot-links"><li><a href="privacy">Adatkezelési tájékoztató</a></li><li><a href="support">Támogatás</a></li><li><a href="delete-account">Fiók és adatok törlése</a></li><li><a href="faq">Gyakori kérdések</a></li></ul>
+  </div>
+  <div data-lang="en" class="foot" lang="en">
+    <div class="foot-id">
+      <a class="foot-home" href="./" aria-label="GrowTogether SportsClub"><svg class="foot-logo" viewBox="0 0 444.596 156.741" role="img" aria-hidden="true"><use href="#gtlogo"></use></svg></a>
+      <p class="foot-org">GrowTogether SportsClub · Budapest<br><a href="mailto:hello@growtogethersportsclub.com">hello@growtogethersportsclub.com</a></p>
+    </div>
+    <ul class="foot-links"><li><a href="privacy">Privacy notice</a></li><li><a href="support">Support</a></li><li><a href="delete-account">Delete your account and data</a></li><li><a href="faq">FAQ</a></li></ul>
+  </div>
 </footer>
 
-</div>
 <script>
 (function(){
-  var titles={hu:'GrowTogether SportsClub',en:'GrowTogether SportsClub'};
+  var ROLES=['athlete','parent','coach','club'];
   function setLang(lang){
     document.documentElement.className='js';
     document.documentElement.setAttribute('lang',lang);
     document.querySelectorAll('[data-lang]').forEach(function(el){el.classList.toggle('on',el.getAttribute('data-lang')===lang);});
     document.querySelectorAll('[data-set]').forEach(function(el){el.classList.toggle('on',el.getAttribute('data-set')===lang);});
-    document.title=titles[lang];
-    // A sajat lapok kozti link viszi a nyelvet (#en).
+    document.querySelectorAll('img[data-alt-en]').forEach(function(img){
+      if(!img.hasAttribute('data-alt-hu')) img.setAttribute('data-alt-hu',img.getAttribute('alt'));
+      img.setAttribute('alt',img.getAttribute('data-alt-'+lang));
+      // A hos kep nyelvfuggo: a kijelzojen a felulet szovege latszik.
+      if(img.hasAttribute('data-src-en')){
+        if(!img.hasAttribute('data-src-hu')) img.setAttribute('data-src-hu',img.getAttribute('src'));
+        img.setAttribute('src',img.getAttribute('data-src-'+lang));
+      }
+    });
+    // A sajat lapok kozti link viszi a nyelvet (#en); a horgony (#...) kimarad.
     document.querySelectorAll('a[href]:not([data-set])').forEach(function(a){
       var h=a.getAttribute('data-href')||a.getAttribute('href');
       if(/^(https?:|mailto:|#)/.test(h)) return;
@@ -103,6 +429,59 @@ footer a{color:var(--muted);margin-right:14px;}
   function fromHash(){setLang(location.hash==='#en'?'en':'hu');}
   window.addEventListener('hashchange',fromHash);
   fromHash();
+
+  function setRole(role){
+    document.querySelectorAll('[data-role]').forEach(function(b){
+      var on=b.getAttribute('data-role')===role;
+      b.classList.toggle('on',on);
+      b.setAttribute('aria-pressed',on?'true':'false');
+    });
+    document.querySelectorAll('[data-rbody]').forEach(function(el){
+      el.classList.toggle('on',el.getAttribute('data-rbody')===role);
+    });
+  }
+  document.querySelectorAll('[data-role]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var r=b.getAttribute('data-role');
+      if(ROLES.indexOf(r)>=0) setRole(r);
+    });
+  });
+
+  /* A nem aktiv szerepek kepe `loading="lazy"`, es rejtett dobozban all, ezert
+     csak kattintasra toltodne - villanna. A lap betoltese utan elotoltjuk oket. */
+  window.addEventListener('load',function(){
+    document.querySelectorAll('[data-rbody] img[loading="lazy"]').forEach(function(img){
+      if(!img.complete) new Image().src=img.getAttribute('src');
+    });
+    document.querySelectorAll('img[data-src-en]').forEach(function(img){
+      new Image().src=img.getAttribute('data-src-en');
+    });
+  });
+
+  var burger=document.querySelector('.burger'), menu=document.getElementById('menu');
+  function setMenu(open){
+    if(!burger||!menu) return;
+    menu.classList.toggle('on',open);
+    burger.classList.toggle('on',open);
+    burger.setAttribute('aria-expanded',open?'true':'false');
+    burger.setAttribute('aria-label',open?burger.getAttribute('data-close'):burger.getAttribute('data-open'));
+  }
+  if(burger) burger.addEventListener('click',function(){setMenu(!menu.classList.contains('on'));});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape') setMenu(false);});
+
+  /* A horgony NEM irhatja a hash-t: a nyelvet a hash adja, egy #sportagak
+     angol nezetben nemán visszavaltana magyarra. Ezert sajat gorgetes. */
+  document.querySelectorAll('[data-go]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var el=document.getElementById(a.getAttribute('data-go'));
+      if(!el) return;
+      e.preventDefault();
+      setMenu(false);
+      var top=el.getBoundingClientRect().top+window.pageYOffset;
+      if('scrollBehavior' in document.documentElement.style){window.scrollTo({top:top,behavior:'smooth'});}
+      else{window.scrollTo(0,top);}
+    });
+  });
 })();
 </script>
 </body>
